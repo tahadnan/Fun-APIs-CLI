@@ -47,8 +47,6 @@ def animal(animal_name : str = None) -> None:
     if not animal_name:
         console.print("[yellow] Please provide an animal name.")
         return
-    with console.status("Monkeying around...", spinner="monkey"):
+    with console.status("Looking around...", spinner="monkey"):
         display_animal_info(fetch_animal_info(name=animal_name))
 
-if __name__ == "__main__":
-    animal("CHEETAH")

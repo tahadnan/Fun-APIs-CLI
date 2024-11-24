@@ -44,7 +44,7 @@ def fetch_quote(category : Optional[str] = None) -> Union[List[Quote], int]:
             return 0
     except ConnectionError:
         console.print("[red]No internet connection! Please check your network and try again.[/red]")
-    return 0
+        return 0
 
 def display_quote(quote : Union[List[Quote], int]) -> None:
     if quote == 0:
@@ -60,5 +60,3 @@ def quote(category : Optional[str] = None) -> None:
     with console.status("Fetching a quote...", spinner="earth"):
         display_quote(quote=fetch_quote(category))
 
-if __name__ == "__main__":
-    quote()

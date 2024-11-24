@@ -31,5 +31,3 @@ def display_fact(fact: Optional[List[Fact]]) -> None:
 def fact() -> None:
     with console.status("Fetching a fun fact...", spinner="earth"):
         display_fact(fetch_fact())
-if __name__ == "__main__":
-    fact()
