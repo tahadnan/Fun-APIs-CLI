@@ -1,1 +1,1 @@
-from .interactive import launch_interactive
+from .interactive import interactive_mode

@@ -1,29 +1,30 @@
 import requests
 from requests import ConnectionError
 from pprint import pprint
-from typing import List, Dict
+from typing import List, Dict, Optional
 from rich.console import Console
 from rich import print_json
-console = Console()
+from .config_manager import load_api_key
+from .constants import AnimalsInfo, console
 
-def fetch_animal_info(name : str) -> List[Dict]:
+def fetch_animal_info(name : str, api_key : str) -> Optional[List[AnimalsInfo]]:
     api_url = 'https://api.api-ninjas.com/v1/animals?name={}'.format(name)
     try:
-        response = requests.get(api_url, headers={'X-Api-Key': 'yCznsy0vc3u7k2r8U9RrLQ==LiWWdUaMMfVAiTb6'})
+        response = requests.get(api_url, headers={'X-Api-Key': api_key})
         if response.status_code == requests.codes.ok:
             if response.json():
                 return response.json()
             else:
                 console.print(f"[red]No animals found matching '{name}'.")
-                return []
+                return None
         else:
             console.print(f"[red]Error: {response.status_code} {response.text}")
-            return []
+            return None
     except ConnectionError:
         console.print("[red]No internet connection! Please check your network and try again.[/red]")
         return None
 
-def display_animal_info(animals_data: List[Dict]):
+def display_animal_info(animals_data: List[AnimalsInfo]) -> None:
     if not animals_data:
         return 
 
@@ -43,10 +44,10 @@ def display_animal_info(animals_data: List[Dict]):
             formatted_key = key.replace('_', ' ').title()
             console.print(f"   [red i]{formatted_key}:[/red i] {value}")
 
-def animal(animal_name : str = None) -> None:
+def animal(api_key : str, animal_name : str = None) -> None:
     if not animal_name:
         console.print("[yellow] Please provide an animal name.")
         return
     with console.status("Looking around...", spinner="monkey"):
-        display_animal_info(fetch_animal_info(name=animal_name))
+        display_animal_info(fetch_animal_info(animal_name, api_key))
 

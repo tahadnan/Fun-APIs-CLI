@@ -2,15 +2,14 @@ import requests
 from requests import ConnectionError
 from typing import List, TypedDict, Optional
 from rich.console import Console
-console = Console()
+from .config_manager import load_api_key
+from .constants import console, Fact
 
-class Fact(TypedDict):
-    fact: str
 
-def fetch_fact() -> Optional[List[Fact]]:
+def fetch_fact(api_key : str) -> Optional[List[Fact]]:
     api_url = 'https://api.api-ninjas.com/v1/facts'
     try:
-        response = requests.get(api_url, headers={'X-Api-Key': 'yCznsy0vc3u7k2r8U9RrLQ==LiWWdUaMMfVAiTb6'})
+        response = requests.get(api_url, headers={'X-Api-Key': api_key})
         if response.status_code == requests.codes.ok:
             fact = response.json()
             if isinstance(fact, list) and len(fact) > 0:
@@ -28,6 +27,6 @@ def display_fact(fact: Optional[List[Fact]]) -> None:
         return
     console.print(f"[green bold]Fun Fact:[/green bold] {fact[0]['fact']}")
 
-def fact() -> None:
+def fact(api_key : str) -> None:
     with console.status("Fetching a fun fact...", spinner="earth"):
-        display_fact(fetch_fact())
+        display_fact(fetch_fact(api_key))
