@@ -18,8 +18,8 @@ source venv/bin/activate  # For Mac/Linux
 .\venv\Scripts\activate   # For Windows
 pip install -r requirements.txt
 ```
-Run the progrm:
+Run the program:
 ```bash
-python3 main.py -h
+python3 fun_apis.py -h
 ```
 
