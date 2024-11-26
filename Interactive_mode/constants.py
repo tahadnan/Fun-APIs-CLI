@@ -11,9 +11,21 @@ quote_topics = f'''
 
 welcome_message = """
 Hello and welcome to Fun APIs interactive mode. Here are the available options:
-    1 - fact (Get you a fun fact)
-    2 - animals (Let you fetch infos about a certain animal)
-    3 - quote (Give you a quote about a certain topic)
+    1 - help (Displays a help message)
+    2 - configure (Let you configure and set up your ninjas' API key)
+    3 - exit (Exits the script)
+    4 - fact (Get you a fun fact)
+    5 - animals (Let you fetch infos about a certain animal)
+    6 - quote (Give you a quote about a certain topic)
 P.S: You can use the numbers (e.g: 1 for fact) or the string itself (e.g: fact)
 """
-
+help_message = '''
+Here are the available options:
+    1 - help (Displays a help message)
+    2 - configure (Let you configure and set up your ninjas' API key)
+    3 - exit (Exits the script)
+    4 - fact (Get you a fun fact)
+    5 - animals (Let you fetch infos about a certain animal)
+    6 - quote (Give you a quote about a certain topic)
+P.S: You can use the numbers (e.g: 1 for fact) or the string itself (e.g: fact)
+'''

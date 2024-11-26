@@ -1,8 +1,8 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from API_handling import fact,animal, quote, load_api_key
-from .constants import console, welcome_message, quote_topics
+from API_handling import fact,animal, quote, load_api_key, configure_api_key
+from .constants import console, welcome_message, quote_topics, help_message
 from prompt_toolkit import prompt, HTML
 
 def prompt_animal(api_key : str):
@@ -22,27 +22,41 @@ def prompt_quote(api_key : str):
         print("Exiting...")
         sys.exit("Have a good day!")
 
+def display_help_message() -> None:
+    console.print(f"[green]{help_message}")
+
+def exit_script() -> None:
+    console.print("[bright_yellow]Have a good day!")
+    exit(0)
+
 options = {
-    "1" : fact,
+    "1" : display_help_message,
+    "help" : display_help_message,
+    "2" : configure_api_key,
+    "configure" : configure_api_key,
+    "3" : exit_script,
+    "exit" : exit_script,
+    "4" : fact,
     "fact" : fact,
-    "2" : prompt_animal,
+    "5" : prompt_animal,
     "animals" : prompt_animal,
-    "3" : prompt_quote,
+    "6" : prompt_quote,
     "quote" : prompt_quote 
 }
 
 def invalid_option(option : str):
-    console.print(f"[orange_red1]{option} is invalid.")
+    console.print(f"[orange_red1]{option} is invalid, run 'help' to check the available commands.")
 
 def launch_interactive(option : str):
-    choice = options.get(option.strip(), None)
+    choice = options.get(option.strip().lower(), None)
     if not choice:
         invalid_option(option)
         return 
+    elif option.lower() in ["1", "help", "2", "configure", "exit", "3"]:
+        choice()
     else:
         api_key = load_api_key()
         if choice is fact:
-            print(choice)
             choice(api_key)
         else:
             choice(api_key=api_key) 
@@ -50,8 +64,9 @@ def launch_interactive(option : str):
 def interactive_mode():
     try:
         console.print(f"[green bold]{welcome_message}[/green bold]")
-        option = prompt(HTML(f"<ansibrightcyan>Which one do you want: </ansibrightcyan>"))
-        launch_interactive(option)
+        while True:
+            option = prompt(HTML(f"<ansibrightcyan>Which one do you want: </ansibrightcyan>"))
+            launch_interactive(option)
     except (EOFError, KeyboardInterrupt):
         print("Exiting...")
-        sys.exit("Have a good day!")
+        exit_script()
