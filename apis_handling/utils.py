@@ -22,6 +22,6 @@ def error_handler(func : Callable):
                 console.print("[magenta]Have a good day!")
                 exit(1)
         except Exception as error:
-            console.print(f"[red]An error has occured:\n{error}")
+            console.print(f"[red]An error has occurred:\n{error}")
             return None
     return wrapper
