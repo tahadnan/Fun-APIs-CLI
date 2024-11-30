@@ -1,3 +1,4 @@
+from .constants import console
 from .animals import animal
 from .facts import fact
 from .quotes import quote

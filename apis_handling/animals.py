@@ -1,33 +1,29 @@
 import requests
-from requests import ConnectionError
-from pprint import pprint
 from typing import List, Dict, Optional
 from rich.console import Console
 from rich import print_json
 from .config_manager import load_api_key
 from .constants import AnimalsInfo, console
+from .utils import error_handler
 
+@error_handler
 def fetch_animal_info(name : str, api_key : str) -> Optional[List[AnimalsInfo]]:
     api_url = 'https://api.api-ninjas.com/v1/animals?name={}'.format(name)
-    try:
-        response = requests.get(api_url, headers={'X-Api-Key': api_key})
-        if response.status_code == requests.codes.ok:
-            if response.json():
-                return response.json()
-            else:
-                console.print(f"[red]No animals found matching '{name}'.")
-                return None
+
+    response = requests.get(api_url, headers={'X-Api-Key': api_key})
+    if response.status_code == requests.codes.ok:
+        if response.json():
+            return response.json()
         else:
-            console.print(f"[red]Error: {response.status_code} {response.text}")
+            console.print(f"[red]No animals found matching '{name}'.")
             return None
-    except ConnectionError:
-        console.print("[red]No internet connection! Please check your network and try again.[/red]")
+    else:
+        console.print(f"[red]Error: {response.status_code} {response.text}")
         return None
 
 def display_animal_info(animals_data: List[AnimalsInfo]) -> None:
     if not animals_data:
         return 
-
     for data_dict in animals_data:
         console.print("[green]\n=== Animal Information ===")
         

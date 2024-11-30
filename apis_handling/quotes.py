@@ -1,12 +1,12 @@
-import requests
 import json
-from requests import ConnectionError
 import random
 from typing import Union, List, TypedDict, Optional
-from rich.console import Console
+import requests
 from .config_manager import load_api_key
 from .constants import console, categories, categories_noun, Quote
+from .utils import error_handler
 
+@error_handler
 def fetch_quote(api_key : str , category : Optional[str] = None) -> Union[List[Quote], int]:
     if not category:
         category = random.choice(categories)
@@ -16,15 +16,12 @@ def fetch_quote(api_key : str , category : Optional[str] = None) -> Union[List[Q
             console.print(f"[red]Invalid category '{category}'. Falling back to random choice![/red]")
             category = random.choice(categories)
     api_url = 'https://api.api-ninjas.com/v1/quotes?category={}'.format(category)
-    try:
-        response = requests.get(api_url, headers={'X-Api-Key': api_key})
-        if response.status_code == requests.codes.ok:
-            return response.json()
-        else:
-            console.print(f"[red]Error: {response.status_code} {response.text}")
-            return None
-    except ConnectionError:
-        console.print("[red]No internet connection! Please check your network and try again.[/red]")
+
+    response = requests.get(api_url, headers={'X-Api-Key': api_key})
+    if response.status_code == requests.codes.ok:
+        return response.json()
+    else:
+        console.print(f"[red]Error: {response.status_code} {response.text}")
         return None
 
 def display_quote(quote : Union[List[Quote], int]) -> None:

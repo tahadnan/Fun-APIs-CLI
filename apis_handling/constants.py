@@ -1,6 +1,6 @@
 from typing import Union, List, Dict, TypedDict
-from rich.console import Console
 import os
+from rich.console import Console
 
 console = Console()
 

@@ -1,11 +1,11 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from API_handling import fact,animal, quote, load_api_key, configure_api_key
+from apis_handling import fact,animal, quote, load_api_key, configure_api_key
 from .constants import console, welcome_message, quote_topics, help_message
 from prompt_toolkit import prompt, HTML
 
-def prompt_animal(api_key : str):
+def prompt_animal(api_key : str) -> None:
     try:
         animal_name = prompt(HTML("<ansibrightblue>Which Animal are you looking for?</ansibrightblue> "))
         animal(api_key=api_key , animal_name=animal_name)
@@ -13,7 +13,7 @@ def prompt_animal(api_key : str):
         print("Exiting...")
         sys.exit("Have a good day!")
 
-def prompt_quote(api_key : str):
+def prompt_quote(api_key : str) -> None:
     try:
         console.print(quote_topics)
         quote_category = prompt(HTML("<ansimagenta>You want a quote about what ?[Leave blank for a random topic]</ansimagenta> "))
@@ -44,14 +44,13 @@ options = {
     "quote" : prompt_quote 
 }
 
-def invalid_option(option : str):
+def invalid_option(option : str) -> None:
     console.print(f"[orange_red1]{option} is invalid, run 'help' to check the available commands.")
 
-def launch_interactive(option : str):
+def launch_interactive(option : str) -> None:
     choice = options.get(option.strip().lower(), None)
     if not choice:
         invalid_option(option)
-        return 
     elif option.lower() in ["1", "help", "2", "configure", "exit", "3"]:
         choice()
     else:
@@ -61,7 +60,7 @@ def launch_interactive(option : str):
         else:
             choice(api_key=api_key) 
 
-def interactive_mode():
+def interactive_mode() -> None:
     try:
         console.print(f"[green bold]{welcome_message}[/green bold]")
         while True:

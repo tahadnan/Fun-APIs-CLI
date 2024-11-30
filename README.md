@@ -1,7 +1,7 @@
 # Fun APIs CLI
 
-A simple Python command-line interface utility to interact with various fun APIs: facts, animals, quotes.
-This project, designed for learning and fun, can pull random facts, animal data, quotes and much more via API Ninjas.
+A simple Python command-line interface utility to interact with various fun APIs: facts, animals, quotes...
+This project, designed for learning and fun, can pull random facts, animal data, quotes and much more via API Ninjas and other API sources.
 
 ## Installation
 

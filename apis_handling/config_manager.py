@@ -1,9 +1,10 @@
+import os
 import json
 from json.decoder import JSONDecodeError
-import os
 from prompt_toolkit import prompt
 from prompt_toolkit.shortcuts import confirm
 from .constants import CONFIG_PATH, console
+from .utils import error_handler
 
 def save_api_key(api_key: str) -> None:
     with open(CONFIG_PATH, 'w') as file:
@@ -17,6 +18,14 @@ def input_api_key() -> str:
         exit(1)
     return api_key
 
+def configure_api_key() -> str:
+    api_key = input_api_key()
+    if not api_key:
+        return 
+    save_api_key(api_key)
+    return api_key
+
+@error_handler
 def load_api_key() -> str:
     try:
         if not os.path.exists(CONFIG_PATH):
@@ -42,12 +51,5 @@ def load_api_key() -> str:
             console.print("[magenta]Have a good day!")
             exit(1)
 
-
-def configure_api_key() -> str:
-    api_key = input_api_key()
-    if not api_key:
-        return 
-    save_api_key(api_key)
-    return api_key
 
 

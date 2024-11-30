@@ -1,14 +1,11 @@
 import argparse
 import requests
-from rich.console import Console
-from API_handling import fact, animal, quote, load_api_key, configure_api_key
-from Interactive_mode import interactive_mode
-
-console = Console()
+from apis_handling import fact, animal, quote, load_api_key, configure_api_key, console
+from interactive_cli import interactive_mode
 
 parser = argparse.ArgumentParser(
                     prog='fun_apis.py',
-                    description='Playing with some Ninjas APIs',
+                    description='Playing with some APIs',
                     epilog='Enjoy it!')
 
 parser.add_argument("-i","--interactive", help="Displays a random fact.", action='store_true')
@@ -22,11 +19,13 @@ args = parser.parse_args()
 if args.config:
     configure_api_key()
 api_key = load_api_key()
+
 if args.interactive:
     interactive_mode()
-if args.fact:
+elif args.fact:
     fact(api_key)  
-if args.animal:
+elif args.animal:
     animal(api_key," ".join(args.animal))  
-if args.quote:
+elif args.quote:
     quote(api_key,args.quote)  
+
