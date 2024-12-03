@@ -1,5 +1,5 @@
 from functools import wraps
-from typing import Callable
+from typing import Callable, Union
 from requests import ConnectionError
 from json.decoder import JSONDecodeError
 from prompt_toolkit.shortcuts import confirm
@@ -13,15 +13,14 @@ def error_handler(func : Callable):
         except ConnectionError:
             console.print("[red]No internet connection! Please check your network and try again.[/red]")
             return None
-        except JSONDecodeError:
-            console.print("[red]Broken JSON file")
-            retry = confirm("Do you want to input a new API key?")
-            if retry:
-                return configure_api_key()
-            else:
-                console.print("[magenta]Have a good day!")
-                exit(1)
         except Exception as error:
-            console.print(f"[red]An error has occurred:\n{error}")
+            console.print(f"[red]An error has occured:[/red]\n{error}")
             return None
     return wrapper
+
+def meters_to_freedom_units(meters : Union[int, float]) -> str:
+    total_feet = meters * 3.28084  
+    feet = int(total_feet)         
+    inches = (total_feet - feet) * 12  
+    return f"{feet}'{round(inches)}\""
+

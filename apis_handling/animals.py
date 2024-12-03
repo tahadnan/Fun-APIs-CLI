@@ -1,7 +1,5 @@
 import requests
 from typing import List, Dict, Optional
-from rich.console import Console
-from rich import print_json
 from .config_manager import load_api_key
 from .constants import AnimalsInfo, console
 from .utils import error_handler
@@ -12,11 +10,7 @@ def fetch_animal_info(name : str, api_key : str) -> Optional[List[AnimalsInfo]]:
 
     response = requests.get(api_url, headers={'X-Api-Key': api_key})
     if response.status_code == requests.codes.ok:
-        if response.json():
-            return response.json()
-        else:
-            console.print(f"[red]No animals found matching '{name}'.")
-            return None
+        return response.json()
     else:
         console.print(f"[red]Error: {response.status_code} {response.text}")
         return None
@@ -32,13 +26,13 @@ def display_animal_info(animals_data: List[AnimalsInfo]) -> None:
         console.print("[cyan]\nTaxonomy:")
         for key, value in data_dict['taxonomy'].items():
             console.print(f"  [cyan i]{key.title().replace("_"," ")}:[/cyan i] {value}")
-        
+    
         console.print("[yellow]\nLocations:", ", ".join(data_dict['locations']))
         
         console.print("[blue]\nCharacteristics:")
         for key, value in data_dict['characteristics'].items():
             formatted_key = key.replace('_', ' ').title()
-            console.print(f"   [red i]{formatted_key}:[/red i] {value}")
+            console.print(f"   [red i]{formatted_key}:[/red i] [white]{value}[/white]")
 
 def animal(api_key : str, animal_name : str = None) -> None:
     if not animal_name:

@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from apis_handling import fact,animal, quote, load_api_key, configure_api_key
+from apis_handling import load_api_key, configure_api_key, fact, animal, quote, celebrity
 from .constants import console, welcome_message, quote_topics, help_message
 from prompt_toolkit import prompt, HTML
 
@@ -18,6 +18,14 @@ def prompt_quote(api_key : str) -> None:
         console.print(quote_topics)
         quote_category = prompt(HTML("<ansimagenta>You want a quote about what ?[Leave blank for a random topic]</ansimagenta> "))
         quote(api_key=api_key,category=quote_category)
+    except (EOFError, KeyboardInterrupt):
+        print("Exiting...")
+        sys.exit("Have a good day!")
+
+def prompt_celebrity(api_key : str) -> None:
+    try:
+        celebrity_name = prompt(HTML("<ansimagenta>Who are you looking for ?</ansimagenta> "))
+        celebrity(api_key=api_key, celeb_name=celebrity_name)
     except (EOFError, KeyboardInterrupt):
         print("Exiting...")
         sys.exit("Have a good day!")
@@ -39,9 +47,11 @@ options = {
     "4" : fact,
     "fact" : fact,
     "5" : prompt_animal,
-    "animals" : prompt_animal,
+    "animal" : prompt_animal,
     "6" : prompt_quote,
-    "quote" : prompt_quote 
+    "quote" : prompt_quote,
+    "7" : prompt_celebrity,
+    "celebrity" : prompt_celebrity
 }
 
 def invalid_option(option : str) -> None:
@@ -51,7 +61,7 @@ def launch_interactive(option : str) -> None:
     choice = options.get(option.strip().lower(), None)
     if not choice:
         invalid_option(option)
-    elif option.lower() in ["1", "help", "2", "configure", "exit", "3"]:
+    elif option.lower().strip() in ["1", "help", "2", "configure", "exit", "3"]:
         choice()
     else:
         api_key = load_api_key()

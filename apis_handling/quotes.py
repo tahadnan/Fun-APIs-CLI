@@ -7,7 +7,7 @@ from .constants import console, categories, categories_noun, Quote
 from .utils import error_handler
 
 @error_handler
-def fetch_quote(api_key : str , category : Optional[str] = None) -> Union[List[Quote], int]:
+def fetch_quote(api_key : str , category : Optional[str] = None) -> Optional[List[Quote]]:
     if not category:
         category = random.choice(categories)
     else:

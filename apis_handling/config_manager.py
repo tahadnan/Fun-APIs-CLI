@@ -25,7 +25,6 @@ def configure_api_key() -> str:
     save_api_key(api_key)
     return api_key
 
-@error_handler
 def load_api_key() -> str:
     try:
         if not os.path.exists(CONFIG_PATH):
@@ -44,12 +43,18 @@ def load_api_key() -> str:
         return api_key
     except JSONDecodeError:
         console.print("[red]Broken JSON file")
-        retry = confirm("Do you want to input a new API key?")
-        if retry:
-            return configure_api_key()
-        else:
-            console.print("[magenta]Have a good day!")
+        try:
+            retry = confirm("Do you want to input a new API key?")
+            if retry:
+                return configure_api_key()
+            else:
+                console.print("[magenta]Have a good day!")
+                exit(1)
+        except (EOFError, KeyboardInterrupt):
+            print("Exiting...")
             exit(1)
+
+        
 
 
 

@@ -17,6 +17,7 @@ Hello and welcome to Fun APIs interactive mode. Here are the available options:
     4 - fact (Get you a fun fact)
     5 - animals (Let you fetch infos about a certain animal)
     6 - quote (Give you a quote about a certain topic)
+    7 - celebrity (Let you search and fetch info about a celebrity)
 P.S: You can use the numbers (e.g: 1 for help) or the string itself (e.g: help)
 """
 help_message = '''
@@ -27,5 +28,6 @@ Here are the available options:
     4 - fact (Get you a fun fact)
     5 - animals (Let you fetch infos about a certain animal)
     6 - quote (Give you a quote about a certain topic)
+    7 - celebrity (Let you search and fetch info about a celebrity)
 P.S: You can use the numbers (e.g: 1 for help) or the string itself (e.g: help)
 '''
