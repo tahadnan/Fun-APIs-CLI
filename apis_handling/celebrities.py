@@ -1,7 +1,6 @@
 import requests
 from typing import Union, List, Dict, Optional
 import pycountry
-from .config_manager import load_api_key
 from .constants import console, CelebrityInfo
 from .utils import error_handler, meters_to_freedom_units
 

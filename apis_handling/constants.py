@@ -4,7 +4,7 @@ from rich.console import Console
 
 console = Console()
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'config.json')
+CONFIG_FILE_PATH = os.path.join(os.path.dirname(__file__),'apis_configuring', 'config.json')
 
 class Fact(TypedDict):
     fact: str

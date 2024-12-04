@@ -1,6 +1,5 @@
 import requests
 from typing import List, Dict, Optional
-from .config_manager import load_api_key
 from .constants import AnimalsInfo, console
 from .utils import error_handler
 

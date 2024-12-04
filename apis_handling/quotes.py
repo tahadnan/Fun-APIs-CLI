@@ -2,7 +2,6 @@ import json
 import random
 from typing import Union, List, TypedDict, Optional
 import requests
-from .config_manager import load_api_key
 from .constants import console, categories, categories_noun, Quote
 from .utils import error_handler
 
