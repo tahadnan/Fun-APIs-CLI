@@ -19,7 +19,7 @@ def display_fact(fact: Optional[List[Fact]]) -> None:
     if not fact:
         console.print("[yellow]No facts to display!")
         return
-    console.print(f"[green bold]Fun Fact:[/green bold] {fact[0]['fact']}")
+    console.print(f"[green bold]Fun Fact:[/green bold] [white]{fact[0]['fact']}")
 
 def fact(api_key : str) -> None:
     with console.status("Fetching a fun fact...", spinner="earth"):

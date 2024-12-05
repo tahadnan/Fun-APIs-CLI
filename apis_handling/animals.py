@@ -5,7 +5,7 @@ from .utils import error_handler
 
 @error_handler
 def fetch_animal_info(name : str, api_key : str) -> Optional[List[AnimalsInfo]]:
-    api_url = 'https://api.api-ninjas.com/v1/animals?name={}'.format(name)
+    api_url = f'https://api.api-ninjas.com/v1/animals?name={name}'
 
     response = requests.get(api_url, headers={'X-Api-Key': api_key})
     if response.status_code == requests.codes.ok:

@@ -1,33 +1,16 @@
-from typing import Union, Optional, List, Dict, TypedDict
 import os
+import json
+from typing import Union, Optional, List, Dict, TypedDict
 from rich.console import Console
+from rich.table import Table
 
 console = Console()
 
-CONFIG_FILE_PATH = os.path.join(os.path.dirname(__file__),'apis_configuring', 'config.json')
-
-class Fact(TypedDict):
-    fact: str
-
-class Quote(TypedDict):
-    quote : str
-    author : str
-    category : str
-
-class AnimalsInfo(TypedDict):
-    name : str
-    taxonomy : Dict[str, str]
-    locations : List[str]
-    characteristics : Dict[str, str]
-
-class CelebrityInfo(TypedDict):
-    name : str
-    net_worth : Optional[int]
-    gender : Optional[str]
-    nationality : Optional[str]
-    occupation : Optional[List[str]]
-    height : Optional[float]
-    birthday : Optional[str]
+CONFIG_FILE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)),'apis_configuring', 'config.json')
+SUPERHEROES_JSON_FILE_PATH : os.PathLike = os.path.join(
+    os.path.dirname(__file__), 
+        'heroes_ids_names.json'
+)
 
 categories   = ["age", "alone", "amazing", "anger", "architecture", "art", "attitude", "beauty", "best", "birthday", "business", "car", "change", "communication", "computers", "cool", "courage", "dad", "dating", "death", "design", "dreams", "education", "environmental", "equality", "experience", "failure", "faith", "family", "famous", "fear", "fitness", "food", "forgiveness", "freedom", "friendship", "funny", "future", "god", "good", "government", "graduation", "great", "happiness", "health", "history", "home", "hope", "humor", "imagination", "inspirational", "intelligence", "jealousy", "knowledge", "leadership", "learning", "legal", "life", "love", "marriage", "medical", "men", "mom", "money", "morning", "movies", "success"]
 
@@ -44,3 +27,13 @@ categories_noun = {
     "legal": "legality",
     "medical": "medicine",
 }
+
+SUPERHEROES_IDS_NAMES_TABLE = Table(title="SuperHeroes IDs and Names", )
+SUPERHEROES_IDS_NAMES_TABLE.add_column("[green]Names", style="red", no_wrap=True)
+SUPERHEROES_IDS_NAMES_TABLE.add_column("[green]IDs", style="blue", no_wrap=True)
+
+with open(SUPERHEROES_JSON_FILE_PATH, 'r') as ref_file:
+    heroes_json : Dict = json.load(ref_file)
+for Name, Id in heroes_json.items():
+    SUPERHEROES_IDS_NAMES_TABLE.add_row(Name,str(Id))
+

@@ -4,8 +4,8 @@ from json.decoder import JSONDecodeError
 from typing import Literal
 from prompt_toolkit import prompt
 from prompt_toolkit.shortcuts import confirm
-from .constants import CONFIG_FILE_PATH, console
-from .utils import error_handler
+from ..constants import CONFIG_FILE_PATH, console
+from ..utils import error_handler
 
 def save_api_key(api_key: str , which_api_key : Literal["ninjas_api_key", "superhero_api_key"]) -> None:
     if which_api_key.strip() not in ["ninjas_api_key", "superhero_api_key"]:
