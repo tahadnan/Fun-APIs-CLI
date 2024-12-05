@@ -4,7 +4,7 @@ from json.decoder import JSONDecodeError
 from typing import Literal
 from prompt_toolkit import prompt
 from prompt_toolkit.shortcuts import confirm
-from ..constants import CONFIG_FILE_PATH, console, valid_apis_keys
+from ...constants import CONFIG_FILE_PATH, console, valid_apis_keys
 from ..utils import error_handler
 
 def save_api_key(api_key: str , which_api_key : Literal[valid_apis_keys]) -> None:

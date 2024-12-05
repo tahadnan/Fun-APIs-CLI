@@ -6,7 +6,7 @@ from rich.table import Table
 
 console = Console()
 
-CONFIG_FILE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)),'apis_configuring', 'config.json')
+CONFIG_FILE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)),'apis_handling','apis_configuring', 'config.json')
 SUPERHEROES_JSON_FILE_PATH : os.PathLike = os.path.join(
     os.path.dirname(__file__), 
         'heroes_ids_names.json'
@@ -38,4 +38,3 @@ with open(SUPERHEROES_JSON_FILE_PATH, 'r') as ref_file:
     heroes_json : Dict = json.load(ref_file)
 for Name, Id in heroes_json.items():
     SUPERHEROES_IDS_NAMES_TABLE.add_row(Name,str(Id))
-

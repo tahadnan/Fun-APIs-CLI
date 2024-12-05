@@ -1,7 +1,3 @@
-from rich.console import Console
-
-console = Console()
-
 available_topics = ['age', 'loneliness', 'amazement', 'anger', 'architecture', 'art', 'attitude', 'beauty', 'excellence', 'birthday', 'business', 'car', 'change', 'communication', 'computers', 'coolness', 'courage', 'dad', 'dating', 'death', 'design', 'dreams', 'education', 'environmental', 'equality', 'experience', 'failure', 'faith', 'family', 'fame', 'fear', 'fitness', 'food', 'forgiveness', 'freedom', 'friendship', 'humor', 'future', 'god', 'goodness', 'government', 'graduation', 'greatness', 'happiness', 'health', 'history', 'home', 'hope', 'humor', 'imagination', 'inspiration', 'intelligence', 'jealousy', 'knowledge', 'leadership', 'learning', 'legality', 'life', 'love', 'marriage', 'medicine', 'men', 'mom', 'money', 'morning', 'movies', 'success']
 
 quote_topics = f'''

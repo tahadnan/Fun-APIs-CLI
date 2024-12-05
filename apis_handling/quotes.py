@@ -2,7 +2,7 @@ import json
 import random
 from typing import Union, List, TypedDict, Optional
 import requests
-from .constants import console, categories, categories_noun, Quote
+from ..constants import console, categories, categories_noun, Quote
 from .utils import error_handler
 
 @error_handler

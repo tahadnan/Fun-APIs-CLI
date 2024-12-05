@@ -1,6 +1,6 @@
 import requests
 from typing import List, Dict, Optional
-from .constants import AnimalsInfo, console
+from ..constants import AnimalsInfo, console
 from .utils import error_handler
 
 @error_handler

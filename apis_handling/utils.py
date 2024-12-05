@@ -4,7 +4,7 @@ import json
 from json import JSONDecodeError
 from typing import Callable, Union
 from requests import ConnectionError
-from .constants import console, SUPERHEROES_JSON_FILE_PATH
+from ..constants import console, SUPERHEROES_JSON_FILE_PATH
 
 def error_handler(func : Callable):
     @wraps(func)
