@@ -4,11 +4,11 @@ from json.decoder import JSONDecodeError
 from typing import Literal
 from prompt_toolkit import prompt
 from prompt_toolkit.shortcuts import confirm
-from ..constants import CONFIG_FILE_PATH, console
+from ..constants import CONFIG_FILE_PATH, console, valid_apis_keys
 from ..utils import error_handler
 
-def save_api_key(api_key: str , which_api_key : Literal["ninjas_api_key", "superhero_api_key"]) -> None:
-    if which_api_key.strip() not in ["ninjas_api_key", "superhero_api_key"]:
+def save_api_key(api_key: str , which_api_key : Literal[valid_apis_keys]) -> None:
+    if which_api_key.strip() not in valid_apis_keys:
         console.print(f"[red]Invalid API choice: '{which_api_key}'. Please check the documentation for valid and needed API keys.[/red]")
         return 
     try:
@@ -29,8 +29,8 @@ def save_api_key(api_key: str , which_api_key : Literal["ninjas_api_key", "super
         with open(CONFIG_FILE_PATH, 'w') as config_file:
             json.dump(config, config_file, indent=4)
 
-def input_api_key(which_api_key : Literal["ninjas_api_key", "superhero_api_key"]) -> str:
-    if which_api_key.lower().strip() not in ["ninjas_api_key", "superhero_api_key"]:
+def input_api_key(which_api_key : Literal[valid_apis_keys]) -> str:
+    if which_api_key.lower().strip() not in valid_apis_keys:
         console.print(f"[red]Invalid API choice: '{which_api_key}'. Please check the documentation for valid and needed API keys.[/red]")
         return     
     api_key = prompt(f"Enter your {which_api_key}: ", is_password=True).strip()
@@ -39,8 +39,8 @@ def input_api_key(which_api_key : Literal["ninjas_api_key", "superhero_api_key"]
         exit(1)
     return api_key
 
-def configure_api_key(which_api_key : Literal["ninjas_api_key", "superhero_api_key"]) -> str:
-    if which_api_key.lower().strip() not in ["ninjas_api_key", "superhero_api_key"]:
+def configure_api_key(which_api_key : Literal[valid_apis_keys]) -> str:
+    if which_api_key.lower().strip() not in valid_apis_keys:
         console.print(f"[red]Invalid API choice: '{which_api_key}'. Please check the documentation for valid and needed API keys.[/red]")
         return 
     api_key = input_api_key(which_api_key)
@@ -49,8 +49,8 @@ def configure_api_key(which_api_key : Literal["ninjas_api_key", "superhero_api_k
     save_api_key(api_key,which_api_key)
     return api_key
 
-def load_api_key(which_api_key : Literal["ninjas_api_key", "superhero_api_key"]) -> str:
-    if which_api_key.lower().strip() not in ["ninjas_api_key", "superhero_api_key"]:
+def load_api_key(which_api_key : Literal[valid_apis_keys]) -> str:
+    if which_api_key.lower().strip() not in valid_apis_keys:
         console.print(f"[red]Invalid API choice: '{which_api_key}'. Please check the documentation for valid and needed API keys.[/red]")
         return 
     try:

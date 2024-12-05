@@ -1,8 +1,8 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from apis_handling import load_api_key, configure_api_key, fact, animal, quote, celebrity
-from .constants import console, welcome_message, quote_topics, help_message
+
+from ..apis_handling import load_api_key, configure_api_key, console , fact, animal, quote, celebrity
+from .cli_constants import welcome_message, quote_topics, help_message
 from prompt_toolkit import prompt, HTML
 
 def prompt_animal(api_key : str) -> None:
