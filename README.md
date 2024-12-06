@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./Fun_APIs_logo.png" width=700 height=500>
+</p>
+
 # Fun APIs CLI
 
 A simple Python command-line interface utility to interact with various fun APIs: facts, animals, quotes...
