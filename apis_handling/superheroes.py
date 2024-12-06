@@ -11,7 +11,12 @@ def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str])
         api_url = f"https://superheroapi.com/api/{api_key}/{superhero_id}"
         response = requests.get(api_url)
         if response.status_code == 200:
-            return response.json()
+            json_response : Optional[SuperHeroInfo] = response.json()
+            if json_response.get('response') == 'error' and json_response.get('error') == 'access denied':
+                console.print(f"[red]Access denied. Please check your API key.[/red]")
+                return None
+
+            return json_response
         else:
             console.print(f"[red]Failed to fetch superhero info. HTTP Status: {response.status_code}")
             return None
@@ -22,7 +27,6 @@ def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str])
 def display_superhero_info(superhero_info: Optional[Dict[str, Union[str, Dict]]]) -> None:
     if not superhero_info:
         return 
-
     superhero_name : str = superhero_info['name']
     console.print(f"[bold green underline]Superhero Name:[/bold green underline] [white]{superhero_name}[/white]")
     console.print("[bright_yellow]'-' refers to Unknown or None ")
