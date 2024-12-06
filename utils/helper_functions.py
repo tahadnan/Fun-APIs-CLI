@@ -4,7 +4,7 @@ import json
 from json import JSONDecodeError
 from typing import Callable, Union
 from requests import ConnectionError
-from ..constants import console, SUPERHEROES_JSON_FILE_PATH
+from constants import console, SUPERHEROES_JSON_FILE_PATH
 
 def error_handler(func : Callable):
     @wraps(func)
@@ -39,5 +39,15 @@ def verify_superhero (superhero_id_or_name : Union[int, str]):
     except JSONDecodeError as err:
         console.print(f"[red]Broken or invalid JSON file:\"{SUPERHEROES_JSON_FILE_PATH}\"\n{err}")
         return False, None
+
+def cli_errors(func : Callable):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except (EOFError, KeyboardInterrupt):
+            print("Exiting...")
+            sys.exit("Have a good day!")
+    return wrapper
 
 

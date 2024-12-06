@@ -14,6 +14,7 @@ Hello and welcome to Fun APIs interactive mode. Here are the available options:
     5 - animals (Let you fetch infos about a certain animal)
     6 - quote (Give you a quote about a certain topic)
     7 - celebrity (Let you search and fetch info about a celebrity)
+    8 - superhero (Allow you to fetch info about superheroes from both the comic universe)
 P.S: You can use the numbers (e.g: 1 for help) or the string itself (e.g: help)
 """
 help_message = '''
@@ -25,5 +26,6 @@ Here are the available options:
     5 - animals (Let you fetch infos about a certain animal)
     6 - quote (Give you a quote about a certain topic)
     7 - celebrity (Let you search and fetch info about a celebrity)
+    8 - superhero (Allow you to fetch info about superheroes from both the comic universe)
 P.S: You can use the numbers (e.g: 1 for help) or the string itself (e.g: help)
 '''

@@ -2,8 +2,8 @@ import json
 import random
 from typing import Union, List, TypedDict, Optional
 import requests
-from ..constants import console, categories, categories_noun, Quote
-from .utils import error_handler
+from constants import console, categories, categories_noun, Quote
+from utils import error_handler
 
 @error_handler
 def fetch_quote(api_key : str , category : Optional[str] = None) -> Optional[List[Quote]]:

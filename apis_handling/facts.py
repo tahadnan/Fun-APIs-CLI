@@ -1,7 +1,7 @@
 from typing import List, TypedDict, Optional
 import requests
-from ..constants import console, Fact
-from .utils import error_handler
+from constants import console, Fact
+from utils import error_handler
 
 @error_handler
 def fetch_fact(api_key : str) -> Optional[List[Fact]]:

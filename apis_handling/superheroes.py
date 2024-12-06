@@ -1,8 +1,9 @@
 from typing import Union, Optional, Dict, List
 import json
 import requests
-from ..constants import console, SuperHeroInfo
-from .utils import error_handler, verify_superhero
+from constants import console, SuperHeroInfo
+from utils import error_handler, verify_superhero
+
 @error_handler
 def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str]) -> Optional[SuperHeroInfo] :
     is_valid_arg, superhero_id = verify_superhero(superhero_id_or_name)
@@ -94,3 +95,6 @@ def display_superhero_info(superhero_info: Optional[Dict[str, Union[str, Dict]]]
     [italic blue]Alliances:[/italic blue] [white]{alliances}[/white]
     [italic blue]Relatives:[/italic blue] [white]{relatives}[/white]
     ''')
+
+def superhero(api_key : str , superhero_id_or_name : Union[int, str]) -> None:
+    display_superhero_info(fetch_superhero_info(api_key, superhero_id_or_name))
