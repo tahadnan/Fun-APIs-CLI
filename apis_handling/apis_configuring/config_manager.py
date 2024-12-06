@@ -11,7 +11,9 @@ from utils import cli_errors
 def verify_api_key_legibility(api_key : str) -> None:
     if api_key.lower().strip() not in valid_apis_keys:
         console.print(f"[red]Invalid API choice: '{ api_key}'. Please check the documentation for valid and needed API keys.[/red]")
-        return 
+        return False
+    else:
+        return True
 
 def save_api_key(api_key: str , which_api_key : Literal[valid_apis_keys]) -> None:
     verify_api_key_legibility(which_api_key)
@@ -58,31 +60,34 @@ def configure_api_key() -> str:
         return 
     save_api_key(api_key,which_api_key)
     return api_key
+
 @cli_errors
 def load_api_key(which_api_key : Literal[valid_apis_keys]) -> str:
-    verify_api_key_legibility(which_api_key)
-    try:
-        if not os.path.exists(CONFIG_FILE_PATH):
-            console.print("[yellow]Config file not found. Creating a new one...[/yellow]")
-            api_key = input_api_key(which_api_key)
-            save_api_key(api_key, which_api_key)
+    if verify_api_key_legibility(which_api_key):
+        try:
+            if not os.path.exists(CONFIG_FILE_PATH):
+                console.print("[yellow]Config file not found. Creating a new one...[/yellow]")
+                api_key = input_api_key(which_api_key)
+                save_api_key(api_key, which_api_key)
 
-        with open(CONFIG_FILE_PATH, 'r') as config_file:
-            config = json.load(config_file)
-            api_key = config.get("api_keys", {}).get(which_api_key, '').strip()
-
-        if not api_key:
-            console.print("[red]No API key found in config.json.[/red]")
-            return configure_api_key(which_api_key)
-        return api_key
-    except JSONDecodeError:
-        console.print("[red]Broken JSON file")
-        retry = confirm("Do you want to input a new API key?")
-        if retry:
-            return configure_api_key()
-        else:
-            console.print("[magenta]Have a good day!")
-            exit(1)
+            with open(CONFIG_FILE_PATH, 'r') as config_file:
+                config = json.load(config_file)
+                api_key = config.get("api_keys", {}).get(which_api_key, '').strip()
+                if not api_key:
+                    console.print(f"[red]No API key found in '{CONFIG_FILE_PATH}'.[/red]")
+                    return configure_api_key()
+            return api_key
+        except JSONDecodeError:
+            console.print("[red]Broken JSON file")
+            retry = confirm("Do you want to input a new API key?")
+            if retry:
+                return configure_api_key()
+            else:
+                console.print("[magenta]Have a good day!")
+                exit(1)
+    else:
+        return None
+        
 
 
         

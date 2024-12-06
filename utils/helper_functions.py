@@ -45,7 +45,7 @@ def cli_errors(func : Callable):
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
         except (EOFError, KeyboardInterrupt):
             print("Exiting...")
             exit("Have a good day!")
