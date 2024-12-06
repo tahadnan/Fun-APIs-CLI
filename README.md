@@ -30,8 +30,5 @@ python3 fun_apis.py -h
 ## Contributing
 
 This project relies on collaboration and community support! It's designed to be an evolving, living tool, and while it currently supports APIs for fun facts, animals, and quotes, the possibilities are endless. Whether you'd like to add new APIs, enhance existing features, refine the code, or even update the documentation, contributions are welcome. Let's make this CLI a better and more diverse tool together. You can fork the repository, look at the code, and send your pull requests-we are excited to see what you will add to the project!
-
-## To-add  
-
-[SuperHeroes API](https://superheroapi.com) 
+ 
 
