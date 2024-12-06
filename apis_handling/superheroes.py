@@ -2,7 +2,7 @@ from typing import Union, Optional, Dict, List
 import json
 import requests
 from constants import console, SuperHeroInfo
-from utils import error_handler, verify_superhero
+from utils import error_handler, verify_superhero, create_powerstats_barplot
 
 @error_handler
 def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str]) -> Optional[SuperHeroInfo] :
@@ -23,8 +23,9 @@ def display_superhero_info(superhero_info: Optional[Dict[str, Union[str, Dict]]]
     if not superhero_info:
         return 
 
-    console.print(f"[bold green underline]Superhero Name:[/bold green underline] [white]{superhero_info['name']}[/white]")
-
+    superhero_name : str = superhero_info['name']
+    console.print(f"[bold green underline]Superhero Name:[/bold green underline] [white]{superhero_name}[/white]")
+    console.print("[bright_yellow]'-' refers to Unknown or None ")
     # Appearance Section
     appearance_section: Dict[str, Union[str, list]] = superhero_info['appearance']
     eye_color: str = appearance_section['eye-color'].title()
@@ -69,29 +70,30 @@ def display_superhero_info(superhero_info: Optional[Dict[str, Union[str, Dict]]]
     ''')
 
     # Powerstats Section
-    powerstats_section: Dict[str, str] = superhero_info['powerstats']
-    combat: int = int(powerstats_section['combat'])
-    durability: int = int(powerstats_section['intelligence'])
-    power: int = int(powerstats_section['power'])
-    speed: int = int(powerstats_section['speed'])
-    strength: int = int(powerstats_section['strength'])
-    overall: float = (combat + durability + power + speed + strength) / 5
+    powerstats_section: Dict[str, str] = {power:(int(stat) if stat != 'null' else 0) for power,stat in superhero_info['powerstats'].items()}
+    combat: int = powerstats_section['combat']
+    intelligence: int = powerstats_section['intelligence']
+    power: int = powerstats_section['power']
+    speed: int = powerstats_section['speed']
+    strength: int = powerstats_section['strength']
+    overall: float = (combat + intelligence + power + speed + strength) / 5
 
     console.print(f'''[bold red]Powerstats:[/bold red]
     [italic green]Combat:[/italic green] [white]{combat}[/white]
-    [italic green]Durability:[/italic green] [white]{durability}[/white]
+    [italic green]Intelligence:[/italic green] [white]{intelligence}[/white]
     [italic green]Power:[/italic green] [white]{power}[/white]
     [italic green]Speed:[/italic green] [white]{speed}[/white]
     [italic green]Strength:[/italic green] [white]{strength}[/white]
     [italic green]Overall:[/italic green] [white]{overall:.2f}[/white]
     ''')
+    create_powerstats_barplot(combat, intelligence, power, speed, strength,superhero_name)
 
     # Connections Section
     connections_section: Dict[str, str] = superhero_info['connections']
     alliances: str = connections_section['group-affiliation']
     relatives: str = connections_section['relatives']
 
-    console.print(f'''[bold yellow]Connections:[/bold yellow]
+    console.print(f'''\n[bold yellow]Connections:[/bold yellow]
     [italic blue]Alliances:[/italic blue] [white]{alliances}[/white]
     [italic blue]Relatives:[/italic blue] [white]{relatives}[/white]
     ''')

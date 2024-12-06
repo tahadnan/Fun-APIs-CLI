@@ -2,10 +2,11 @@ import os
 import json
 from json.decoder import JSONDecodeError
 from typing import Literal
-from prompt_toolkit import prompt
+from prompt_toolkit import prompt, HTML
 from prompt_toolkit.shortcuts import confirm
+from rich.prompt import Prompt
 from constants import CONFIG_FILE_PATH, console, valid_apis_keys
-from utils import error_handler
+from utils import cli_errors
 
 def save_api_key(api_key: str , which_api_key : Literal[valid_apis_keys]) -> None:
     if which_api_key.strip() not in valid_apis_keys:
@@ -39,10 +40,18 @@ def input_api_key(which_api_key : Literal[valid_apis_keys]) -> str:
         exit(1)
     return api_key
 
-def configure_api_key(which_api_key : Literal[valid_apis_keys]) -> str:
-    if which_api_key.lower().strip() not in valid_apis_keys:
-        console.print(f"[red]Invalid API choice: '{which_api_key}'. Please check the documentation for valid and needed API keys.[/red]")
-        return 
+@cli_errors
+def configure_api_key() -> str:
+    valid_apis_keys_string : str = f"{"; ".join(valid_apis_keys)}"
+    console.print(f"Which API key are you willing to configure [bright_blue i]({valid_apis_keys_string})[/bright_blue i]")
+    while True:
+        which_api_key = prompt(HTML(f"> "))
+        if which_api_key in valid_apis_keys:
+            break
+        else:
+            console.print(f"{which_api_key} [red i] is invalid Please choose a valid option.")
+            console.print(f"Available options => [bright_blue i]({valid_apis_keys_string})[/bright_blue i]")
+            continue
     api_key = input_api_key(which_api_key)
     if not api_key:
         return 

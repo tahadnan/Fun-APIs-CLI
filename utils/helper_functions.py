@@ -5,6 +5,7 @@ from json import JSONDecodeError
 from typing import Callable, Union
 from requests import ConnectionError
 from constants import console, SUPERHEROES_JSON_FILE_PATH
+import plotext as plt
 
 def error_handler(func : Callable):
     @wraps(func)
@@ -47,7 +48,12 @@ def cli_errors(func : Callable):
             func(*args, **kwargs)
         except (EOFError, KeyboardInterrupt):
             print("Exiting...")
-            sys.exit("Have a good day!")
+            exit("Have a good day!")
     return wrapper
 
+def create_powerstats_barplot(combat : int, intelligence: int, power: int, speed: int, strength: int, sup_name : str):
+    powerstats = ["Combat", "Intelligence", "Power", "Speed", "Strength"]
+    powerstats_percentages = [combat, intelligence, power, speed, strength]
+    plt.simple_bar(powerstats, powerstats_percentages, width = 50,color="green", title = plt.colorize(f'{sup_name} Powerstats Chart', "magenta"))
+    plt.show()
 

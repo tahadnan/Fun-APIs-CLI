@@ -4,6 +4,7 @@ from apis_handling import load_api_key, configure_api_key, fact, animal, quote, 
 from constants import welcome_message, quote_topics, help_message, console
 from utils import cli_errors
 from prompt_toolkit import prompt, HTML
+from prompt_toolkit.shortcuts import radiolist_dialog, input_dialog
 
 def display_help_message() -> None:
     console.print(f"[green]{help_message}")
@@ -18,26 +19,23 @@ def invalid_option(option : str) -> None:
 @cli_errors
 def prompt_animal(api_key : str) -> None:
     animal_name = prompt(HTML("<ansibrightblue>Which Animal are you looking for?</ansibrightblue> "))
-    animal(api_key=api_key , animal_name=animal_name)
+    animal(api_key , animal_name)
 
 @cli_errors
 def prompt_quote(api_key : str) -> None:
     console.print(quote_topics)
     quote_category = prompt(HTML("<ansimagenta>You want a quote about what ?[Leave blank for a random topic]</ansimagenta> "))
-    quote(api_key=api_key,category=quote_category)
+    quote(api_key,quote_category)
 
 @cli_errors
 def prompt_celebrity(api_key : str) -> None:
     celebrity_name = prompt(HTML("<ansimagenta>Who are you looking for ?</ansimagenta> "))
-    celebrity(api_key=api_key, celeb_name=celebrity_name)
+    celebrity(api_key, celebrity_name)
 
 @cli_errors
 def prompt_superhero(api_key : str) -> None:
-    sup_name = prompt(HTML("<ansimagenta>Which sup are you looking for ?</ansimagenta> "))
-    superhero(api_key, sup_name)
-
-def prompt_configure_api_key():
-    pass
+    superhero_id_or_name = prompt(HTML("<ansimagenta>Which sup are looking for ?</ansimagenta> "))
+    superhero(api_key, superhero_id_or_name)
 
 options = {
     "1" : display_help_message,

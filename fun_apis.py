@@ -1,6 +1,6 @@
 import argparse
 import requests
-from apis_handling import load_api_key, configure_api_key, fact, animal, quote, celebrity
+from apis_handling import load_api_key, configure_api_key, fact, animal, quote, celebrity, superhero
 from constants import console
 from interactive_cli import interactive_mode
 
@@ -33,5 +33,5 @@ elif args.quote:
 elif args.search_celebrity :
     celebrity(api_key=load_api_key(which_api_key="ninjas_api_key"),celeb_name=" ".join(args.search_celebrity))
 elif args.search_superhero :
-    celebrity(api_key=load_api_key(which_api_key="superhero_api_key"),celeb_name=" ".join(args.search_superhero))
+    superhero(api_key=load_api_key(which_api_key="superhero_api_key"),superhero_id_or_name=" ".join(args.search_superhero ))
 
