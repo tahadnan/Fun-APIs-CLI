@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="./Fun_APIs_logo.png" width=700 height=500>
-</p>
+![LOGO](https://raw.githubusercontent.com/tahadnan/Fun-APIs-CLI/main/Fun_APIs_logo.png)
 
 # Fun APIs CLI
 
@@ -12,7 +10,7 @@ This project, designed for learning and fun, can pull random facts, animal data,
 Clone the repository:
 ```bash
 git clone https://github.com/tahadnan/Fun-APIs-CLI.git
-cd Fun-APIs-CLI
+cd Fun-APIs-CLI/fun_apis
 ```
 
 (Highly Recommended)Set up a virtual environment and install dependencies:
