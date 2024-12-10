@@ -3,11 +3,11 @@ import random
 from typing import Union, List, TypedDict, Optional
 import requests
 from constants import console, categories, categories_noun, Quote
-from utils import error_handler
+from utils import requests_error_handler
 
-@error_handler
+@requests_error_handler
 def fetch_quote(api_key : str , category : Optional[str] = None) -> Optional[List[Quote]]:
-    if not category:
+    if not category or category == "random":
         category = random.choice(categories)
     else:
         category = {v: k for k, v in categories_noun.items()}.get(category.lower(), category.lower())

@@ -2,9 +2,9 @@ import requests
 from typing import Union, List, Dict, Optional
 import pycountry
 from constants import console, CelebrityInfo
-from utils import error_handler, meters_to_freedom_units
+from utils import requests_error_handler, meters_to_freedom_units
 
-@error_handler
+@requests_error_handler
 def fetch_celebrity_info(api_key: str , celeb_name : str) -> Optional[List[CelebrityInfo]]:
     api_url = f'https://api.api-ninjas.com/v1/celebrity?name={celeb_name}'
     response = requests.get(api_url, headers={'X-Api-Key': api_key})

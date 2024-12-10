@@ -1,9 +1,9 @@
 from typing import List, TypedDict, Optional
 import requests
 from constants import console, Fact
-from utils import error_handler
+from utils import requests_error_handler
 
-@error_handler
+@requests_error_handler
 def fetch_fact(api_key : str) -> Optional[List[Fact]]:
     api_url = 'https://api.api-ninjas.com/v1/facts'
     response = requests.get(api_url, headers={'X-Api-Key': api_key})

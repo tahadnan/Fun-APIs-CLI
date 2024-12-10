@@ -1,8 +1,11 @@
 import argparse
+from typing import Union
 import requests
-from apis_handling import load_api_key, configure_api_key, fact, animal, quote, celebrity, superhero
+from apis_handling import fact, animal, quote, celebrity, superhero
+from configuration import load_api_key, configure_api_key
 from constants import console
 from interactive_cli import interactive_mode
+from utils import parse_multiple_types
 
 parser = argparse.ArgumentParser(
                     prog='fun_apis.py',
@@ -16,7 +19,7 @@ parser.add_argument("-f","--fact", help="Displays a random fact.", action='store
 parser.add_argument("-a","--animal",metavar="animal_name", help="Displays animal(s) information.", nargs="+",type=str)
 parser.add_argument("-q","--quote", metavar="quote_topic" ,help="Displays a random quote.", type=str)
 parser.add_argument("-sc","--search-celebrity",metavar="celebrity_name", help="Displays a celebrity information.", nargs="+",type=str)
-parser.add_argument("-ss","--search-superhero",metavar="sup_name", help="Displays a superhero information.", nargs="+",type=str)
+parser.add_argument("-ss","--search-superhero",metavar="sup_name", help="Displays a superhero information.", nargs="+",type=parse_multiple_types)
 
 args = parser.parse_args()
 
@@ -33,5 +36,11 @@ elif args.quote:
 elif args.search_celebrity :
     celebrity(api_key=load_api_key(which_api_key="ninjas_api_key"),celeb_name=" ".join(args.search_celebrity))
 elif args.search_superhero :
-    superhero(api_key=load_api_key(which_api_key="superhero_api_key"),superhero_id_or_name=" ".join(args.search_superhero ))
+    reference : Union[str, int] = args.search_superhero[0]
+    if isinstance(reference, str):
+        superhero(api_key=load_api_key(which_api_key="superhero_api_key"),
+                  superhero_id_or_name=" ".join(args.search_superhero))
+    elif isinstance(reference, int):
+        superhero(api_key=load_api_key(which_api_key="superhero_api_key"),
+                  superhero_id_or_name=reference)
 

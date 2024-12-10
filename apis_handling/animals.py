@@ -1,9 +1,9 @@
 import requests
 from typing import List, Dict, Optional
 from constants import AnimalsInfo, console
-from utils import error_handler
+from utils import requests_error_handler
 
-@error_handler
+@requests_error_handler
 def fetch_animal_info(name : str, api_key : str) -> Optional[List[AnimalsInfo]]:
     api_url = f'https://api.api-ninjas.com/v1/animals?name={name}'
 

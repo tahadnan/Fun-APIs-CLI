@@ -2,9 +2,9 @@ from typing import Union, Optional, Dict, List
 import json
 import requests
 from constants import console, SuperHeroInfo
-from utils import error_handler, verify_superhero, create_powerstats_barplot
+from utils import requests_error_handler, verify_superhero, create_powerstats_barplot
 
-@error_handler
+@requests_error_handler
 def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str]) -> Optional[SuperHeroInfo] :
     is_valid_arg, superhero_id = verify_superhero(superhero_id_or_name)
     if is_valid_arg:
@@ -29,7 +29,7 @@ def display_superhero_info(superhero_info: Optional[Dict[str, Union[str, Dict]]]
         return 
     superhero_name : str = superhero_info['name']
     console.print(f"[bold green underline]Superhero Name:[/bold green underline] [white]{superhero_name}[/white]")
-    console.print("[bright_yellow]'-' refers to Unknown or None ")
+    console.print("[bright_yellow i]'-' refers to Unknown or None ")
     # Appearance Section
     appearance_section: Dict[str, Union[str, list]] = superhero_info['appearance']
     eye_color: str = appearance_section['eye-color'].title()
