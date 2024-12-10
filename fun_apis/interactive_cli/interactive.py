@@ -1,8 +1,8 @@
 import os
-from apis_handling import fact, animal, quote, celebrity, superhero
-from configuration import load_api_key, configure_api_key
-from constants import welcome_message, quote_topics, help_message, console, static_options, AVAILABLE_QUOTE_TOPICS
-from utils import cli_errors_handler, clear_screen
+from ..apis_handling import fact, animal, quote, celebrity, superhero
+from ..configuration import load_api_key, configure_api_key
+from ..constants import welcome_message, quote_topics, help_message, console, static_options, AVAILABLE_QUOTE_TOPICS
+from ..utils import cli_errors_handler, clear_screen
 from prompt_toolkit import prompt, HTML
 from prompt_toolkit.completion import WordCompleter
 

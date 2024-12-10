@@ -4,7 +4,7 @@ from json import JSONDecodeError
 from functools import wraps
 from typing import Callable, Union, Any, Optional
 from requests import ConnectionError
-from constants import console, SUPERHEROES_JSON_FILE_PATH
+from ..constants import console, SUPERHEROES_JSON_FILE_PATH
 import plotext as plt
 
 def requests_error_handler(func: Callable[..., Any]) -> Any:

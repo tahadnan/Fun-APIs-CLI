@@ -1,8 +1,8 @@
 from typing import Union, Optional, Dict, List
 import json
 import requests
-from constants import console, SuperHeroInfo
-from utils import requests_error_handler, verify_superhero, create_powerstats_barplot
+from ..constants import console, SuperHeroInfo
+from ..utils import requests_error_handler, verify_superhero, create_powerstats_barplot
 
 @requests_error_handler
 def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str]) -> Optional[SuperHeroInfo] :

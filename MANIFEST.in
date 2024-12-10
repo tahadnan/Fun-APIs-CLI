@@ -1,0 +1,3 @@
+include Fun_APIs_logo.png
+include LICENSE
+include fun_apis/constants/heroes_ids_names.json

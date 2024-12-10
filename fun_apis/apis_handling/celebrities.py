@@ -1,8 +1,8 @@
 import requests
 from typing import Union, List, Dict, Optional
 import pycountry
-from constants import console, CelebrityInfo
-from utils import requests_error_handler, meters_to_freedom_units
+from ..constants import console, CelebrityInfo
+from ..utils import requests_error_handler, meters_to_freedom_units
 
 @requests_error_handler
 def fetch_celebrity_info(api_key: str , celeb_name : str) -> Optional[List[CelebrityInfo]]:
