@@ -3,15 +3,13 @@ import json
 from typing import Union, Optional, List, Dict, TypedDict
 from rich.console import Console
 from rich.table import Table
+from platformdirs import user_config_dir
 
 console = Console()
 
 CONFIG_FILE_PATH : os.PathLike = os.path.join(
-    os.path.dirname(
-        os.path.dirname(__file__)
-        ),
-        'configuration', 'config.json'
-    )
+    os.path.dirname(user_config_dir(appname="Fun_APIs_CLI", ensure_exists=True) ,'config.json'
+    ))
 SUPERHEROES_JSON_FILE_PATH : os.PathLike = os.path.join(
     os.path.dirname(__file__), 
         'heroes_ids_names.json'
