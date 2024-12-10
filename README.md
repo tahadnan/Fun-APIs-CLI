@@ -10,7 +10,7 @@ This project, designed for learning and fun, can pull random facts, animal data,
 Clone the repository:
 ```bash
 git clone https://github.com/tahadnan/Fun-APIs-CLI.git
-cd Fun-APIs-CLI/fun_apis
+cd Fun-APIs-CLI
 ```
 
 (Highly Recommended)Set up a virtual environment and install dependencies:
@@ -19,6 +19,7 @@ python3 -m venv venv
 source venv/bin/activate  # For Mac/Linux
 .\venv\Scripts\activate   # For Windows
 pip install -r requirements.txt
+python3 
 ```
 Run the program:
 ```bash

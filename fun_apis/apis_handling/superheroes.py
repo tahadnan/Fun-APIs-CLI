@@ -40,7 +40,7 @@ def display_superhero_info(superhero_info: Optional[Dict[str, Union[str, Dict]]]
     weight_us, weight_metric = appearance_section['weight'][0], appearance_section['weight'][1]
 
     console.print(f'''[bold blue]Appearance:[/bold blue]
-    [italic yellow]Eye Color:[/italic yellow] [{eye_color.lower()}]{eye_color}[/{eye_color.lower()}]
+    [italic yellow]Eye Color:[/italic yellow] [white]{eye_color}[/white]
     [italic yellow]Gender:[/italic yellow] [white]{gender}[/white]
     [italic yellow]Hair Color:[/italic yellow] [white]{hair_color}[/white]
     [italic yellow]Height:[/italic yellow] [white]{height_us} / {height_metric}[/white]
