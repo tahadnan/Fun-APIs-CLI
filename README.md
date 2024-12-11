@@ -12,11 +12,6 @@ This project, designed for learning and fun, can pull random facts, animal data,
 There are two methods to achive this:
 1. Through PyPi:
 Head to the PyPi [project page](https://pypi.org/project/Fun-APIs-CLI/) and install the package, following the instructions.
-There are two methods to achive this:
-1. Through PyPi:
-Head to the PyPi [project page](https://pypi.org/project/Fun-APIs-CLI/) and install the package, following the instructions.
-
-2. Locally:
 2. Locally:
 Clone the repository:
 ```bash
@@ -24,11 +19,8 @@ git clone https://github.com/tahadnan/Fun-APIs-CLI.git
 cd Fun-APIs-CLI
 cd Fun-APIs-CLI
 ```
-
-**(Highly Recommended)Set up a virtual environment and install dependencies:**
 **(Highly Recommended)Set up a virtual environment and install dependencies:**
 ```bash
-python -m venv venv
 python -m venv venv
 source venv/bin/activate  # For Mac/Linux
 .\venv\Scripts\activate   # For Windows
@@ -36,7 +28,6 @@ pip install -r requirements.txt
 ```
 Run the program:
 ```bash
-python -m fun_apis.cli -h 
 python -m fun_apis.cli -h 
 ```
 
