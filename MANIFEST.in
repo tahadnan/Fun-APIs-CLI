@@ -1,2 +1,3 @@
 include LICENSE
-include fun_apis/constants/heroes_ids_names.json
+graft fun_apis/constants
+include README_PyPi.md 

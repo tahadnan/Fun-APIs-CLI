@@ -1,4 +1,7 @@
-![LOGO](https://raw.githubusercontent.com/tahadnan/Fun-APIs-CLI/main/Fun_APIs_logo.png)
+<p align="center">
+    <img src="Fun_APIs_logo.png">
+    <a href="https://badge.fury.io/py/Fun-APIs-CLI"><img src="https://badge.fury.io/py/Fun-APIs-CLI.svg?icon=si%3Apython" alt="PyPI version" height="18"></a>
+</p>
 
 # Fun APIs CLI
 
@@ -6,24 +9,27 @@ A simple Python command-line interface utility to interact with various fun APIs
 This project, designed for learning and fun, can pull random facts, animal data, quotes and much more via API Ninjas and other API sources.
 
 ## Installation
+There are two methods to achive this:
+1. Through PyPi:
+Head to the PyPi [project page](https://pypi.org/project/Fun-APIs-CLI/) and install the package, following the instructions.
 
+2. Locally:
 Clone the repository:
 ```bash
 git clone https://github.com/tahadnan/Fun-APIs-CLI.git
 cd Fun-APIs-CLI
 ```
 
-(Highly Recommended)Set up a virtual environment and install dependencies:
+**(Highly Recommended)Set up a virtual environment and install dependencies:**
 ```bash
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate  # For Mac/Linux
 .\venv\Scripts\activate   # For Windows
 pip install -r requirements.txt
-python3 
 ```
 Run the program:
 ```bash
-python3 fun_apis.py -h
+python -m fun_apis.cli -h 
 ```
 
 ## Contributing

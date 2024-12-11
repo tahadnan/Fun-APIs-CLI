@@ -1,6 +1,7 @@
-config.json
-Fun-APIs-CLI.wiki/
 test.py
+README_PyPi.md
+setup.py
+pyproject.toml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

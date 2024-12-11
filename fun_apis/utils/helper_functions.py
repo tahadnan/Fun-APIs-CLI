@@ -63,7 +63,7 @@ def create_powerstats_barplot(combat : int, intelligence: int, power: int, speed
     plt.simple_bar(powerstats, powerstats_percentages, width = 50,color="green", title = plt.colorize(f'{sup_name} Powerstats Chart', "magenta"))
     plt.show()
 
-# A function for fun_apis.py
+# A function for parsing -ss/--search-superhero arguments 
 def parse_multiple_types(value):
     try:
         return int(value)
