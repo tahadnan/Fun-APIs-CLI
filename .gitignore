@@ -2,6 +2,7 @@ test.py
 README_PyPi.md
 setup.py
 pyproject.toml
+MANIFEST.in
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
