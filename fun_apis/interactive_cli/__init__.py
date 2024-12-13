@@ -1,1 +1,1 @@
-from .interactive import interactive_mode
+from .interactive import interactive_mode as interactive_mode

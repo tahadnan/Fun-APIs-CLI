@@ -1,4 +1,3 @@
-import os
 from ..apis_handling import fact, animal, quote, celebrity, superhero
 from ..configuration import load_api_key, configure_api_key
 from ..constants import welcome_message, quote_topics, help_message, console, no_api_key_needed, AVAILABLE_QUOTE_TOPICS
@@ -15,7 +14,7 @@ def exit_script() -> None:
 
 def invalid_option(option : str) -> None:
     if option.strip() == "":
-        console.print(f"[orange_red1]Input cannot be empty, run 'help' to check the available commands.")
+        console.print("[orange_red1]Input cannot be empty, run 'help' to check the available commands.")
     else:
         console.print(f"[orange_red1]{option} is invalid, run 'help' to check the available commands.")
 
@@ -87,5 +86,5 @@ def interactive_mode() -> None:
     console.print(f"[green bold]{welcome_message}[/green bold]")
     while True:
         cli_prompt_completer = WordCompleter(list(options.keys()),ignore_case=True)
-        option = prompt(HTML(f"<ansibrightcyan>What would you like to do? Select an option by its <u>number</u> or <u>name</u>: </ansibrightcyan>"), completer=cli_prompt_completer) 
+        option = prompt(HTML("<ansibrightcyan>What would you like to do? Select an option by its <u>number</u> or <u>name</u>: </ansibrightcyan>"), completer=cli_prompt_completer) 
         launch_interactive(option)

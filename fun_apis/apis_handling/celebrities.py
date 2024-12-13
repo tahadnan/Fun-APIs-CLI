@@ -1,5 +1,5 @@
 import requests
-from typing import Union, List, Dict, Optional
+from typing import List, Optional
 import pycountry
 from ..constants import console, CelebrityInfo
 from ..utils import requests_error_handler, meters_to_freedom_units

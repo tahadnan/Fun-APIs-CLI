@@ -1,6 +1,6 @@
 import os
 import json
-from typing import Union, Optional, List, Dict, TypedDict
+from typing import  List, Dict
 from rich.console import Console
 from rich.table import Table
 from platformdirs import user_config_dir

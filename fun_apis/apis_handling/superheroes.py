@@ -1,8 +1,7 @@
 from typing import Union, Optional, Dict, List
-import json
 import requests
 from ..constants import console, SuperHeroInfo
-from ..utils import requests_error_handler, verify_superhero, create_powerstats_barplot, measure_function_execution_time
+from ..utils import requests_error_handler, verify_superhero, create_powerstats_barplot
 
 @requests_error_handler
 def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str]) -> Optional[SuperHeroInfo] :
@@ -16,7 +15,7 @@ def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str])
                 if response.status_code == 200:
                     response = response.json()
                     if response.get('response') == 'error' and response.get('error') == 'access denied':
-                        console.print(f"[red]Access denied. Please check your API key.[/red]")
+                        console.print("[red]Access denied. Please check your API key.[/red]")
                         return None
                     else:
                         json_response.append(response)
@@ -30,7 +29,7 @@ def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str])
             if response.status_code == 200:
                 json_response : Optional[SuperHeroInfo] = response.json()
                 if json_response.get('response') == 'error' and json_response.get('error') == 'access denied':
-                    console.print(f"[red]Access denied. Please check your API key.[/red]")
+                    console.print("[red]Access denied. Please check your API key.[/red]")
                     return None
                 return json_response
             else:
@@ -49,7 +48,7 @@ def display_superhero_info(*sups_info : Optional[Union[SuperHeroInfo, List[Super
             for superhero_info in sup_info:
                 display_one_superhero_info(superhero_info)
         else:
-            console.print(f"Found 1 superhero.")
+            console.print("Found 1 superhero.")
             display_one_superhero_info(sup_info)
  
 def display_one_superhero_info(superhero_info: Optional[SuperHeroInfo]) -> None:

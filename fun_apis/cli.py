@@ -1,6 +1,4 @@
 import argparse
-from typing import Union
-import requests
 from .apis_handling import fact, animal, quote, celebrity, superhero
 from .configuration import load_api_key, configure_api_key
 from .interactive_cli import interactive_mode

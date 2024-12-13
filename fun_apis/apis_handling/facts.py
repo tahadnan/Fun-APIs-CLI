@@ -1,4 +1,4 @@
-from typing import List, TypedDict, Optional
+from typing import List, Optional
 import requests
 from ..constants import console, Fact
 from ..utils import requests_error_handler

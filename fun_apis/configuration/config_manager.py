@@ -5,13 +5,12 @@ from typing import Literal
 from prompt_toolkit import prompt, HTML
 from prompt_toolkit.shortcuts import confirm
 from prompt_toolkit.completion import WordCompleter
-from rich.prompt import Prompt
 from ..constants import CONFIG_FILE_PATH, console, valid_options, valid_options_string, valid_apis_keys
 from ..utils import cli_errors_handler
 
 def verify_api_key_legibility(api_key : str) -> None:
     if api_key.lower().strip() not in valid_apis_keys:
-        console.print(f"[red]Invalid API choice: '{ api_key}'. Please check the documentation for valid and needed API keys.[/red]")
+        console.print(f"[red]Invalid API choice: '{api_key}'. Please check the documentation for valid and needed API keys.[/red]")
         return False
     else:
         return True
@@ -40,7 +39,7 @@ def input_api_key(which_api_key : Literal[valid_apis_keys]) -> str:
     verify_api_key_legibility(which_api_key)    
     api_key = prompt(f"Enter your {which_api_key}: ", is_password=True).strip()
     if not api_key:
-        console.print(f"[red]Input field cannot be empty. Exiting...[/red]")
+        console.print("[red]Input field cannot be empty. Exiting...[/red]")
         exit(1)
     return api_key
 
@@ -49,10 +48,10 @@ def configure_api_key() -> str:
     prompt_completer = WordCompleter(valid_options)
     console.print(f"Which API key are you willing to configure [bright_blue i]({valid_options_string})[/bright_blue i]")
     while True:
-        which_api_key = prompt(HTML(f"> "), completer=prompt_completer).strip().lower()
+        which_api_key = prompt(HTML("> "), completer=prompt_completer).strip().lower()
         all = False
         if not which_api_key:
-            console.print(f"[red i]Input cannot be empty, please choose a valid option.")
+            console.print("[red i]Input cannot be empty, please choose a valid option.")
             console.print(f"Available options => [bright_blue i]({valid_options_string})[/bright_blue i]")
             continue
         if which_api_key == "all":

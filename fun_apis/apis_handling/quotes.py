@@ -1,6 +1,5 @@
-import json
 import random
-from typing import Union, List, TypedDict, Optional
+from typing import Union, List, Optional
 import requests
 from ..constants import console, categories, categories_noun, Quote
 from ..utils import requests_error_handler

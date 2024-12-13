@@ -2,7 +2,7 @@ import os
 import json
 from json import JSONDecodeError
 from functools import wraps
-from typing import Callable, Union, Any, Optional
+from typing import Callable, Union, Any, Dict
 from time import perf_counter
 from requests import ConnectionError
 from ..constants import console, SUPERHEROES_JSON_FILE_PATH, SUPERHEROES_IDS_NAMES_TABLE

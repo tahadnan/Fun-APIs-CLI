@@ -1,5 +1,5 @@
 import requests
-from typing import List, Dict, Optional
+from typing import List, Optional
 from ..constants import AnimalsInfo, console
 from ..utils import requests_error_handler
 
