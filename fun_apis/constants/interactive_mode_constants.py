@@ -19,7 +19,7 @@ quote_topics = f"""
 [/bright_cyan bold]
 """
 
-static_options = ["1", "help", "2", "configure", "clear", "3", "exit", "4"]
+no_api_key_needed = ["1", "help", "2", "configure", "clear", "3", "exit", "4", "superheroes-table","10"]
 
 _available_options_paragraph = '''
     1 - help (Displays a help message)
@@ -31,6 +31,7 @@ _available_options_paragraph = '''
     7 - quote (Give you a quote about a certain topic)
     8 - celebrity (Let you search and fetch info about a celebrity)
     9 - superhero (Allow you to fetch info about superheroes from both the comic universe)
+    10 - superheroes-table (Displays a table of available valid superheroes and their IDs)
 '''
 
 welcome_message = f"""

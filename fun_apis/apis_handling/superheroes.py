@@ -2,31 +2,60 @@ from typing import Union, Optional, Dict, List
 import json
 import requests
 from ..constants import console, SuperHeroInfo
-from ..utils import requests_error_handler, verify_superhero, create_powerstats_barplot
+from ..utils import requests_error_handler, verify_superhero, create_powerstats_barplot, measure_function_execution_time
 
 @requests_error_handler
 def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str]) -> Optional[SuperHeroInfo] :
     is_valid_arg, superhero_id = verify_superhero(superhero_id_or_name)
     if is_valid_arg:
-        api_url = f"https://superheroapi.com/api/{api_key}/{superhero_id}"
-        response = requests.get(api_url)
-        if response.status_code == 200:
-            json_response : Optional[SuperHeroInfo] = response.json()
-            if json_response.get('response') == 'error' and json_response.get('error') == 'access denied':
-                console.print(f"[red]Access denied. Please check your API key.[/red]")
-                return None
-
+        if isinstance(superhero_id, list):
+            json_response : Optional[List[SuperHeroInfo]] = []
+            for hero_id in superhero_id:
+                api_url = f"https://superheroapi.com/api/{api_key}/{hero_id}"
+                response = requests.get(api_url)
+                if response.status_code == 200:
+                    response = response.json()
+                    if response.get('response') == 'error' and response.get('error') == 'access denied':
+                        console.print(f"[red]Access denied. Please check your API key.[/red]")
+                        return None
+                    else:
+                        json_response.append(response)
+                else:
+                    console.print(f"[red]Failed to fetch superhero info. HTTP Status: {response.status_code}")
+                    return None
             return json_response
         else:
-            console.print(f"[red]Failed to fetch superhero info. HTTP Status: {response.status_code}")
-            return None
+            api_url = f"https://superheroapi.com/api/{api_key}/{superhero_id}"
+            response = requests.get(api_url)
+            if response.status_code == 200:
+                json_response : Optional[SuperHeroInfo] = response.json()
+                if json_response.get('response') == 'error' and json_response.get('error') == 'access denied':
+                    console.print(f"[red]Access denied. Please check your API key.[/red]")
+                    return None
+                return json_response
+            else:
+                console.print(f"[red]Failed to fetch superhero info. HTTP Status: {response.status_code}")
+                return None
     else:
-        console.print(f"[yellow]Invalid superhero identifier: {superhero_id_or_name}")
+        console.print(f"[yellow]Invalid superhero identifier or name: {superhero_id_or_name}")
         return None
 
-def display_superhero_info(superhero_info: Optional[Dict[str, Union[str, Dict]]]) -> None:
+def display_superhero_info(*sups_info : Optional[Union[SuperHeroInfo, List[SuperHeroInfo]]]) -> None:
+    for sup_info in sups_info:
+        if not sup_info:
+            return
+        elif isinstance(sup_info, list):
+            console.print(f"Found {len(sup_info)} superheroes.")    
+            for superhero_info in sup_info:
+                display_one_superhero_info(superhero_info)
+        else:
+            console.print(f"Found 1 superhero.")
+            display_one_superhero_info(sup_info)
+ 
+def display_one_superhero_info(superhero_info: Optional[SuperHeroInfo]) -> None:
     if not superhero_info:
-        return 
+        return
+
     superhero_name : str = superhero_info['name']
     console.print(f"[bold green underline]Superhero Name:[/bold green underline] [white]{superhero_name}[/white]")
     console.print("[bright_yellow i]'-' refers to Unknown or None ")

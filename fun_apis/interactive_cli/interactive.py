@@ -1,8 +1,8 @@
 import os
 from ..apis_handling import fact, animal, quote, celebrity, superhero
 from ..configuration import load_api_key, configure_api_key
-from ..constants import welcome_message, quote_topics, help_message, console, static_options, AVAILABLE_QUOTE_TOPICS
-from ..utils import cli_errors_handler, clear_screen
+from ..constants import welcome_message, quote_topics, help_message, console, no_api_key_needed, AVAILABLE_QUOTE_TOPICS
+from ..utils import cli_errors_handler, clear_screen, display_superheroes_table
 from prompt_toolkit import prompt, HTML
 from prompt_toolkit.completion import WordCompleter
 
@@ -60,14 +60,16 @@ options = {
     "8" : prompt_celebrity,
     "celebrity" : prompt_celebrity,
     "9" : prompt_superhero,
-    "superhero" : prompt_superhero
+    "superhero" : prompt_superhero,
+    "10" : display_superheroes_table,
+    "superheroes-table" : display_superheroes_table
 }
 
 def launch_interactive(option : str) -> None:
     choice = options.get(option.strip().lower(), None)
     if not choice:
         invalid_option(option)
-    elif option.lower().strip() in static_options:
+    elif option.lower().strip() in no_api_key_needed:
         choice()
     else:
         if option.lower().strip() in list(options.keys())[8:16]:
@@ -84,6 +86,6 @@ def launch_interactive(option : str) -> None:
 def interactive_mode() -> None:
     console.print(f"[green bold]{welcome_message}[/green bold]")
     while True:
-        cli_prompt_completer = WordCompleter(list(options.keys()))
+        cli_prompt_completer = WordCompleter(list(options.keys()),ignore_case=True)
         option = prompt(HTML(f"<ansibrightcyan>What would you like to do? Select an option by its <u>number</u> or <u>name</u>: </ansibrightcyan>"), completer=cli_prompt_completer) 
         launch_interactive(option)

@@ -3,9 +3,21 @@ import json
 from json import JSONDecodeError
 from functools import wraps
 from typing import Callable, Union, Any, Optional
+from time import perf_counter
 from requests import ConnectionError
-from ..constants import console, SUPERHEROES_JSON_FILE_PATH
+from ..constants import console, SUPERHEROES_JSON_FILE_PATH, SUPERHEROES_IDS_NAMES_TABLE
 import plotext as plt
+
+# For testing purposes
+def measure_function_execution_time(func: Callable[..., Any]) -> Any:
+    @wraps(func)
+    def wrapper(*args: Any, **kwargs: Any):
+        start = perf_counter()
+        result = func(*args, **kwargs)
+        end = perf_counter()
+        console.print(f"\"{func.__name__}\" Function done within {end - start: .2f} s.")
+        return result
+    return wrapper
 
 def requests_error_handler(func: Callable[..., Any]) -> Any:
     @wraps(func)
@@ -36,20 +48,26 @@ def meters_to_freedom_units(meters : Union[int, float]) -> str:
     inches = (total_feet - feet) * 12  
     return f"{feet}'{round(inches)}\""
 
-def verify_superhero (superhero_id_or_name : Union[int, str]):
+def verify_superhero (superhero_id_or_name : str):
     try:
-        with open(SUPERHEROES_JSON_FILE_PATH, "r") as ref_file:
-            ref = json.load(ref_file)
-
-        if isinstance(superhero_id_or_name,int) and superhero_id_or_name in ref.values():
-            return True, superhero_id_or_name
-        elif isinstance(superhero_id_or_name, str) and superhero_id_or_name.title() in ref.keys():
-            return True, ref.get(superhero_id_or_name.title())
-        else:
-            return False, None
+        with open(SUPERHEROES_JSON_FILE_PATH, "r") as superheroes_json_file:
+            ref : Dict = json.load(superheroes_json_file)
+        try:
+            id = int(superhero_id_or_name)
+            if  1 <= id <= 731:
+                return True,id
+            else:
+                return False,None 
+        except ValueError:
+            id = [int(ids) for ids in ref if ref[ids]==superhero_id_or_name.title()]
+            if not id:
+                return False,None
+            elif len(id) == 1:
+                return True,id[0]      
+            return True,id
     except JSONDecodeError as err:
         console.print(f"[red]Broken or invalid JSON file:\"{SUPERHEROES_JSON_FILE_PATH}\"\n{err}")
-        return False, None
+        return None, False
 
 def clear_screen() -> None:
     if os.name == 'nt':
@@ -63,10 +81,7 @@ def create_powerstats_barplot(combat : int, intelligence: int, power: int, speed
     plt.simple_bar(powerstats, powerstats_percentages, width = 50,color="green", title = plt.colorize(f'{sup_name} Powerstats Chart', "magenta"))
     plt.show()
 
-# A function for parsing -ss/--search-superhero arguments 
-def parse_multiple_types(value):
-    try:
-        return int(value)
-    except ValueError:
-        return value
+def display_superheroes_table() -> None:
+    console.print(SUPERHEROES_IDS_NAMES_TABLE)
+
 
