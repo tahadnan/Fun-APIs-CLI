@@ -1,26 +1,16 @@
-import random
 from typing import Union, List, Optional
 import requests
-from ..constants import console, categories, categories_noun, Quote
+from ..constants import console, categories_noun, Quote
 from ..helper_functions import requests_error_handler
 
 @requests_error_handler
-def fetch_quote(api_key : str , category : Optional[str] = None) -> Optional[List[Quote]]:
-    if not category or category == "random":
-        category = random.choice(categories)
-    else:
-        category = {v: k for k, v in categories_noun.items()}.get(category.lower(), category.lower())
-        if category not in categories:
-            console.print(f"[red]Invalid category '{category}'. Falling back to random choice![/red]")
-            category = random.choice(categories)
-    api_url = f'https://api.api-ninjas.com/v1/quotes?category={category}'
-
+def fetch_quote(api_key : str ) -> Optional[List[Quote]]:
+    api_url = 'https://api.api-ninjas.com/v1/quotes'
     response = requests.get(api_url, headers={'X-Api-Key': api_key})
     if response.status_code == requests.codes.ok:
         return response.json()
     else:
-        console.print(f"[red]Error: {response.status_code} {response.text}")
-        return None
+        raise Exception(f"Error: {response.status_code} {response.text}")
 
 def display_quote(quote : Union[List[Quote], int]) -> None:
     if not quote:
@@ -32,7 +22,6 @@ def display_quote(quote : Union[List[Quote], int]) -> None:
     said by [cyan i]{quote['author']}[/cyan i] about [red]{topic}[/red]
     ''')
 
-def quote(api_key : str , category : Optional[str] = None) -> None:
+def quote(api_key : str) -> None:
     with console.status("Fetching a quote...", spinner="earth"):
-        display_quote(quote=fetch_quote(api_key,category))
-
+        display_quote(quote=fetch_quote(api_key))

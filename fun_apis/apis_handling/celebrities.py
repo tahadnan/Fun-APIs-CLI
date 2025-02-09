@@ -30,7 +30,7 @@ def display_celebrity_info(celeb_info : Optional[List[CelebrityInfo]]) -> None:
         if age and birthday:
             console.print(f"[bright_blue]Age & Birthday:[/bright_blue] [white]{age} years old[/white], [magenta]{birthday}[/magenta]")
 
-        height : Optional[int] = celebrity_info.get('height')
+        height : Optional[int] = celebrity_info.get('height', None)
         if height:
             console.print(f"[yellow]Height:[/yellow] [white]{height} m[/white] / ~ [light_slate_blue]{meters_to_freedom_units(float(height))}[/light_slate_blue]")
 

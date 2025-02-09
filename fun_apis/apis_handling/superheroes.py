@@ -114,4 +114,5 @@ def display_one_superhero_info(superhero_info: Optional[SuperHeroInfo]) -> None:
     ''')
 
 def superhero(api_key : str , superhero_id_or_name : Union[int, str]) -> None:
-    display_superhero_info(fetch_superhero_info(api_key, superhero_id_or_name))
+    with console.status("Fetching sup info...", spinner="aesthetic"):
+        display_superhero_info(fetch_superhero_info(api_key, superhero_id_or_name))

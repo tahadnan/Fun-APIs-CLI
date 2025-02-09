@@ -10,8 +10,7 @@ from ..helper_functions import cli_errors_handler
 
 def verify_api_key_legibility(api_key : str) -> None:
     if api_key.lower().strip() not in valid_apis_keys:
-        console.print(f"[red]Invalid API choice: '{api_key}'. Please check the documentation for valid and needed API keys.[/red]")
-        return False
+        raise ValueError(f"Invalid API choice: '{api_key}'. Please check the documentation for valid and needed API keys.")
     else:
         return True
 
@@ -49,13 +48,13 @@ def configure_api_key() -> str:
     console.print(f"Which API key are you willing to configure [bright_blue i]({valid_options_string})[/bright_blue i]")
     while True:
         which_api_key = prompt(HTML("> "), completer=prompt_completer).strip().lower()
-        all = False
+        configure_all_apis = False
         if not which_api_key:
             console.print("[red i]Input cannot be empty, please choose a valid option.")
             console.print(f"Available options => [bright_blue i]({valid_options_string})[/bright_blue i]")
             continue
         if which_api_key == "all":
-            all = True
+            configure_all_apis = True
             break
         if which_api_key in valid_apis_keys:
             break
@@ -63,7 +62,7 @@ def configure_api_key() -> str:
             console.print(f"{which_api_key} [red i] is invalid Please choose a valid option.")
             console.print(f"Available options => [bright_blue i]({valid_options_string})[/bright_blue i]")
             continue
-    if all:
+    if configure_all_apis:
         for api_key in valid_apis_keys: 
             save_api_key(input_api_key(api_key), which_api_key=api_key)
     else:

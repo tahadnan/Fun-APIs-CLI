@@ -15,7 +15,7 @@ def main_entry():
     parser.add_argument("-i","--interactive", help="Displays a random fact.", action='store_true')
     parser.add_argument("-f","--fact", help="Displays a random fact.", action='store_true')
     parser.add_argument("-a","--animal",metavar="animal_name", help="Displays animal(s) information.", nargs="+",type=str)
-    parser.add_argument("-q","--quote", metavar="quote_topic" ,help="Displays a random quote.", type=str)
+    parser.add_argument("-q","--quote", help="Displays a random quote.", action='store_true')
     parser.add_argument("-sc","--search-celebrity",metavar="celebrity_name", help="Displays a celebrity information.", nargs="+",type=str)
     parser.add_argument("-ss","--search-superhero",metavar="sup_name", help="Displays a superhero information.", nargs="+",type=str)
     parser.add_argument("-st","--superhero-table", help="Displays superheroes table.", action='store_true')
@@ -24,14 +24,14 @@ def main_entry():
 
     if args.config:
         configure_api_key() 
-    if args.interactive:
+    elif args.interactive:
         interactive_mode()
     elif args.fact:
         fact(api_key=load_api_key(which_api_key="ninjas_api_key"))  
     elif args.animal:
         animal(api_key=load_api_key(which_api_key="ninjas_api_key"),animal_name=" ".join(args.animal))
     elif args.quote:
-        quote(api_key=load_api_key(which_api_key="ninjas_api_key"),category=args.quote)  
+        quote(api_key=load_api_key(which_api_key="ninjas_api_key"))
     elif args.search_celebrity :
         celebrity(api_key=load_api_key(which_api_key="ninjas_api_key"),celeb_name=" ".join(args.search_celebrity))
     elif args.search_superhero :

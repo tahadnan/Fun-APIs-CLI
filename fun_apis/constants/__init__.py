@@ -5,7 +5,6 @@ from .general_constants import (
     valid_apis_keys,
     valid_options,
     valid_options_string,
-    categories,
     categories_noun,
     SUPERHEROES_IDS_NAMES_TABLE
 )
@@ -19,7 +18,6 @@ __all__ = [
     'valid_apis_keys',
     'valid_options',
     'valid_options_string',
-    'categories',
     'categories_noun',
     'SUPERHEROES_IDS_NAMES_TABLE',
     'Fact',
@@ -27,11 +25,6 @@ __all__ = [
     'AnimalsInfo',
     'CelebrityInfo',
     'SuperHeroInfo',
-    'AVAILABLE_QUOTE_TOPICS',
-    'columns',
-    'max_topic_length',
-    'formatted_topics',
-    'quote_topics',
     'no_api_key_needed',
     'welcome_message',
     'help_message'

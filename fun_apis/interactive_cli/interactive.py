@@ -1,6 +1,6 @@
 from ..apis_handling import fact, animal, quote, celebrity, superhero
 from ..configuration import load_api_key, configure_api_key
-from ..constants import welcome_message, quote_topics, help_message, console, no_api_key_needed, AVAILABLE_QUOTE_TOPICS
+from ..constants import welcome_message, help_message, console, no_api_key_needed
 from ..helper_functions import cli_errors_handler, clear_screen, display_superheroes_table
 from prompt_toolkit import prompt, HTML
 from prompt_toolkit.completion import WordCompleter
@@ -23,12 +23,9 @@ def prompt_animal(api_key : str) -> None:
     animal_name = prompt(HTML("<ansibrightblue>Which Animal are you looking for?</ansibrightblue> "))
     animal(api_key , animal_name)
 
-@cli_errors_handler
-def prompt_quote(api_key : str) -> None:
-    console.print(quote_topics)
-    quote_prompt_completer = WordCompleter(AVAILABLE_QUOTE_TOPICS, ignore_case=True)
-    quote_category = prompt(HTML("<ansimagenta>You want a quote about what ?</ansimagenta> <i><ansiblue>[Leave blank for a random topic]</ansiblue></i> "), completer=quote_prompt_completer)
-    quote(api_key,quote_category)
+# @cli_errors_handler
+# def prompt_quote(api_key : str) -> None:
+#     quote(api_key)
 
 @cli_errors_handler
 def prompt_celebrity(api_key : str) -> None:
@@ -54,8 +51,8 @@ options = {
     "fact" : fact,
     "6" : prompt_animal,
     "animal" : prompt_animal,
-    "7" : prompt_quote,
-    "quote" : prompt_quote,
+    "7" : quote,
+    "quote" : quote,
     "8" : prompt_celebrity,
     "celebrity" : prompt_celebrity,
     "9" : prompt_superhero,
