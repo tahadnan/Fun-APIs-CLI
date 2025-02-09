@@ -2,10 +2,10 @@ import os
 import json
 from json import JSONDecodeError
 from functools import wraps
-from typing import Callable, Union, Any, Dict
+from typing import Callable, Union, Any, Dict, Optional
 from time import perf_counter
-from requests import ConnectionError
-from ..constants import console, SUPERHEROES_JSON_FILE_PATH, SUPERHEROES_IDS_NAMES_TABLE
+from requests import ConnectionError, Response
+from ..constants import console, SUPERHEROES_JSON_FILE_PATH, SUPERHEROES_IDS_NAMES_TABLE, SuperHeroInfo
 import plotext as plt
 
 # For testing purposes
@@ -84,4 +84,16 @@ def create_powerstats_barplot(combat : int, intelligence: int, power: int, speed
 def display_superheroes_table() -> None:
     console.print(SUPERHEROES_IDS_NAMES_TABLE)
 
+def response_verifier(response: Response) -> Optional[SuperHeroInfo]:
+    if response.status_code == 200:
+        json_start = response.text.find("{")
+        if json_start == -1:
+            raise Exception("Invalid response format: No JSON found.")
+        raw_json_text = response.text[json_start:]
 
+        json_response: Optional[SuperHeroInfo] = json.loads(raw_json_text)
+        if json_response.get('response') == 'error' and json_response.get('error') == 'access denied':
+            raise Exception("Access denied. Please check your API key.[/red]")
+        return json_response
+    else:
+        raise Exception(f"Failed to fetch superhero info. HTTP Status: {response.status_code}")
