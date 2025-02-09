@@ -1,7 +1,7 @@
 from typing import List, Optional
 import requests
 from ..constants import console, Fact
-from ..utils import requests_error_handler
+from ..helper_functions import requests_error_handler
 
 @requests_error_handler
 def fetch_fact(api_key : str) -> Optional[List[Fact]]:

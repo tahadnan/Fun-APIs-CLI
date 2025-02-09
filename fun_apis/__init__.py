@@ -1,1 +1,1 @@
-from .cli import main_entery as main_entery
+from .cli import main_entry as main_entry

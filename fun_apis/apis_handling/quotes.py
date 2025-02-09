@@ -2,7 +2,7 @@ import random
 from typing import Union, List, Optional
 import requests
 from ..constants import console, categories, categories_noun, Quote
-from ..utils import requests_error_handler
+from ..helper_functions import requests_error_handler
 
 @requests_error_handler
 def fetch_quote(api_key : str , category : Optional[str] = None) -> Optional[List[Quote]]:

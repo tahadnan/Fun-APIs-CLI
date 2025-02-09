@@ -1,7 +1,7 @@
 import requests
 from typing import List, Optional
 from ..constants import AnimalsInfo, console
-from ..utils import requests_error_handler
+from ..helper_functions import requests_error_handler
 
 @requests_error_handler
 def fetch_animal_info(name : str, api_key : str) -> Optional[List[AnimalsInfo]]:

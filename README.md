@@ -30,6 +30,9 @@ Run the program:
 ```bash
 python -m fun_apis.cli -h 
 ```
+## To-Do
++ Fix Ninjas quote API due to new premium limitation for category
++ Add shell completetion support for bash, zsh and pwsh.
 
 ## Contributing
 

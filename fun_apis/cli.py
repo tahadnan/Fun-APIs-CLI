@@ -2,9 +2,9 @@ import argparse
 from .apis_handling import fact, animal, quote, celebrity, superhero
 from .configuration import load_api_key, configure_api_key
 from .interactive_cli import interactive_mode
-from .utils import display_superheroes_table
+from .helper_functions import display_superheroes_table
 
-def main_entery():
+def main_entry():
     parser = argparse.ArgumentParser(
                         prog='fun_apis.py',
                         description='Playing with some APIs',
@@ -40,4 +40,4 @@ def main_entery():
         display_superheroes_table()
         
 if __name__ == "__main__":
-    main_entery()
+    main_entry()

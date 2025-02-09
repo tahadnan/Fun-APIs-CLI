@@ -27,9 +27,9 @@ def requests_error_handler(func: Callable[..., Any]) -> Any:
         except ConnectionError:
             console.print("[red]No internet connection! Please check your network and try again.[/red]")
             return None
-        except Exception as error:
-            console.print(f"[red]An error has occured:[/red]\n{error}")
-            return None
+        # except Exception as error:
+        #     console.print(f"[red]An error has occured:[/red]\n{error}")
+        #     return None
     return wrapper
 
 def cli_errors_handler(func: Callable[..., Any]) -> Any:
@@ -53,18 +53,18 @@ def verify_superhero (superhero_id_or_name : str):
         with open(SUPERHEROES_JSON_FILE_PATH, "r") as superheroes_json_file:
             ref : Dict = json.load(superheroes_json_file)
         try:
-            id = int(superhero_id_or_name)
-            if  1 <= id <= 731:
-                return True,id
+            sup_id = int(superhero_id_or_name)
+            if  1 <= sup_id <= 731:
+                return True,sup_id
             else:
                 return False,None 
         except ValueError:
-            id = [int(ids) for ids in ref if ref[ids]==superhero_id_or_name.title()]
-            if not id:
+            sup_id = [int(ids) for ids in ref if ref[ids]==superhero_id_or_name.title()]
+            if not sup_id:
                 return False,None
-            elif len(id) == 1:
-                return True,id[0]      
-            return True,id
+            elif len(sup_id) == 1:
+                return True,sup_id[0]      
+            return True,sup_id
     except JSONDecodeError as err:
         console.print(f"[red]Broken or invalid JSON file:\"{SUPERHEROES_JSON_FILE_PATH}\"\n{err}")
         return None, False
