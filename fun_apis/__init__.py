@@ -1,0 +1,1 @@
+from .cli import main_entry as main_entry

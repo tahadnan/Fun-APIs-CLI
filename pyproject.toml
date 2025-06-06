@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+lint.ignore= ["F403"]
+
+[project]
+name = "fun-apis-cli"
+version = "0.2.3"
+description = "A fun Python CLI tool for fetching random facts, animal information, quotes, and much more from various APIs."
+readme = {file = "README_PyPi.md", content-type = "text/markdown"}
+authors = [
+    {name = "Taha Yasser Adnan", email = "taha.y.adnan@gmail.com"}
+]
+license = {file = "LICENSE"}
+urls = {Homepage = "https://github.com/tahadnan/Fun-APIs-CLI",Repository = "https://github.com/tahadnan/Fun-APIs-CLI"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License", 
+    "Operating System :: OS Independent",
+    "Natural Language :: English"
+]
+
+keywords = ["APIs", "CLI", "fun apis"]
+requires-python = ">=3.6"
+
+dependencies = [
+    "prompt_toolkit",
+    "pycountry",
+    "requests",
+    "rich",
+    "plotext",
+    "platformdirs"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["fun_apis*"]
+
+[tool.setuptools.package-data]
+fun_apis = ["constants/*.json"]
+
+[tool.setuptools.exclude-package-data]
+fun_apis = ["requirements.txt","README.md"]
+
+[project.scripts]
+fun-apis-cli = "fun_apis:main_entry"
