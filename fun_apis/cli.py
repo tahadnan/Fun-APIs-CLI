@@ -1,7 +1,7 @@
 import argparse
 from .apis_handling import fact, animal, quote, celebrity, superhero
 from .configuration import load_api_key, configure_api_key
-from .interactive_cli import interactive_mode
+from .CLI import interactive_mode
 from .helper_functions import display_superheroes_table
 
 def main_entry():
