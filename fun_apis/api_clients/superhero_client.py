@@ -1,7 +1,7 @@
 from typing import Union, Optional, Dict, List
 import requests
-from ..constants import console, SuperHeroInfo
-from ..helper_functions import requests_error_handler, verify_superhero, create_powerstats_barplot, response_verifier
+from fun_apis.constants import console, SuperHeroInfo
+from fun_apis.utils import requests_error_handler, response_verifier, verify_superhero, create_powerstats_barplot, measure_function_execution_time
 
 @requests_error_handler
 def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str]) -> Optional[SuperHeroInfo] :
@@ -10,12 +10,12 @@ def fetch_superhero_info(api_key : str , superhero_id_or_name : Union[int, str])
         if isinstance(superhero_id, list):
             sups_info : Optional[List[SuperHeroInfo]] = []
             for hero_id in superhero_id:
-                api_url = f"https://superheroapi.com/api/{api_key}/{hero_id}"
+                api_url = f"https://superheroapi.com/api.php/{api_key}/{hero_id}"
                 response = requests.get(api_url)
                 sups_info.append(response_verifier(response))
             return sups_info
         else:
-            api_url = f"https://superheroapi.com/api/{api_key}/{superhero_id}"
+            api_url = f"https://superheroapi.com/api.php/{api_key}/{superhero_id}"
             response = requests.get(api_url)
 
             return response_verifier(response)
@@ -116,3 +116,4 @@ def display_one_superhero_info(superhero_info: Optional[SuperHeroInfo]) -> None:
 def superhero(api_key : str , superhero_id_or_name : Union[int, str]) -> None:
     with console.status("Fetching sup info...", spinner="aesthetic"):
         display_superhero_info(fetch_superhero_info(api_key, superhero_id_or_name))
+        

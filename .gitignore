@@ -1,7 +1,4 @@
-test.py
 README_PyPi.md
-setup.py
-MANIFEST.in
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

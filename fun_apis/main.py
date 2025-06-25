@@ -1,8 +1,8 @@
 import argparse
-from .apis_handling import fact, animal, quote, celebrity, superhero
-from .configuration import load_api_key, configure_api_key
-from .CLI import interactive_mode
-from .helper_functions import display_superheroes_table
+from fun_apis.api_clients import * 
+from fun_apis.config import *
+from fun_apis.cli import interactive_mode
+from fun_apis.utils import display_superheroes_table
 
 def main_entry():
     parser = argparse.ArgumentParser(
@@ -16,9 +16,9 @@ def main_entry():
     parser.add_argument("-f","--fact", help="Displays a random fact.", action='store_true')
     parser.add_argument("-a","--animal",metavar="animal_name", help="Displays animal(s) information.", nargs="+",type=str)
     parser.add_argument("-q","--quote", help="Displays a random quote.", action='store_true')
-    parser.add_argument("-sc","--search-celebrity",metavar="celebrity_name", help="Displays a celebrity information.", nargs="+",type=str)
-    parser.add_argument("-ss","--search-superhero",metavar="sup_name", help="Displays a superhero information.", nargs="+",type=str)
-    parser.add_argument("-st","--superhero-table", help="Displays superheroes table.", action='store_true')
+    parser.add_argument("-sc","--search-celebrity",metavar="celebrity_name", help="Displays information about a celebrity.", nargs="+",type=str)
+    parser.add_argument("-ss","--search-superhero",metavar="sup_name", help="Displays information about superhero .", nargs="+",type=str)
+    parser.add_argument("-st","--superhero-table", help="Displays available superheroes table.", action='store_true')
 
     args = parser.parse_args()
 

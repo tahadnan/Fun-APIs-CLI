@@ -1,7 +1,7 @@
-from ..apis_handling import fact, animal, quote, celebrity, superhero
-from ..configuration import load_api_key, configure_api_key
-from ..constants import welcome_message, help_message, console, no_api_key_needed
-from ..helper_functions import cli_errors_handler, clear_screen, display_superheroes_table
+from fun_apis.api_clients import *
+from fun_apis.config import load_api_key, configure_api_key
+from fun_apis.constants import welcome_message, help_message, console, no_api_key_needed
+from fun_apis.utils import cli_errors_handler, clear_screen, display_superheroes_table
 from prompt_toolkit import prompt, HTML
 from prompt_toolkit.completion import WordCompleter
 

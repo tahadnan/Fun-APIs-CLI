@@ -1,7 +1,7 @@
 from typing import Union, List, Optional
 import requests
-from ..constants import console, categories_noun, Quote
-from ..helper_functions import requests_error_handler
+from fun_apis.constants import console, categories_noun, Quote
+from fun_apis.utils import requests_error_handler
 
 @requests_error_handler
 def fetch_quote(api_key : str ) -> Optional[List[Quote]]:

@@ -5,8 +5,8 @@ from typing import Literal
 from prompt_toolkit import prompt, HTML
 from prompt_toolkit.shortcuts import confirm
 from prompt_toolkit.completion import WordCompleter
-from ..constants import CONFIG_FILE_PATH, console, valid_options, valid_options_string, valid_apis_keys
-from ..helper_functions import cli_errors_handler
+from fun_apis.constants import CONFIG_FILE_PATH, console, valid_options, valid_options_string, valid_apis_keys
+from fun_apis.utils import cli_errors_handler
 
 def verify_api_key_legibility(api_key : str) -> None:
     if api_key.lower().strip() not in valid_apis_keys:
@@ -99,9 +99,3 @@ def load_api_key(which_api_key : Literal[valid_apis_keys]) -> str:
     else:
         return None
         
-
-
-        
-
-
-

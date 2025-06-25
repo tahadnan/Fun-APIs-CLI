@@ -1,15 +1,14 @@
-from .general_constants import (
+from .general import (
     console,
     CONFIG_FILE_PATH,
     SUPERHEROES_JSON_FILE_PATH,
     valid_apis_keys,
     valid_options,
     valid_options_string,
-    categories_noun,
-    SUPERHEROES_IDS_NAMES_TABLE
+    categories_noun
 )
-from .typed_dicts import *
-from .interactive_mode_constants import *
+from .types import *
+from .interactive import *
 
 __all__ = [
     'console',
@@ -19,7 +18,6 @@ __all__ = [
     'valid_options',
     'valid_options_string',
     'categories_noun',
-    'SUPERHEROES_IDS_NAMES_TABLE',
     'Fact',
     'Quote',
     'AnimalsInfo',

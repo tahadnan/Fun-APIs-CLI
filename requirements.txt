@@ -1,6 +1,0 @@
-prompt_toolkit
-pycountry
-requests
-rich
-plotext
-platformdirs
