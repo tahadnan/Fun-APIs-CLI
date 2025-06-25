@@ -2,7 +2,7 @@
 name = "fun-apis-cli"
 version = "1.0.0"
 description = "A fun Python CLI tool for fetching random facts, animal information, quotes, and much more from various APIs."
-readme = "README.md"
+readme = "README_PyPi.md"
 requires-python = ">=3.13"
 authors = [
     {name = "Taha Yasser Adnan", email = "taha.y.adnan@gmail.com"}
@@ -26,6 +26,7 @@ dependencies = [
     "requests>=2.32.4",
     "rich>=14.0.0",
     "ruff>=0.12.0",
+    "twine>=6.1.0",
 ]
 
 [tool.setuptools.packages.find]
