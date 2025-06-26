@@ -17,7 +17,6 @@ Clone the repository:
 ```bash
 git clone https://github.com/tahadnan/Fun-APIs-CLI.git
 cd Fun-APIs-CLI
-cd Fun-APIs-CLI
 ```
 **(Highly Recommended)Set up a virtual environment and install dependencies:**
 ```bash
@@ -28,8 +27,16 @@ pip install -r requirements.txt
 ```
 Run the program:
 ```bash
-python -m fun_apis.cli -h 
+python -m fun_apis.main -h 
 ```
+3. Using [UV](https://docs.astral.sh/uv/)(May vary from an OS to another):
+```bash
+git clone https://github.com/tahadnan/Fun-APIs-CLI.git
+cd Fun-APIs-CLI
+uv sync
+uv run -m fun_apis.main
+```
+
 ## To-Do
 + Add shell completetion support for bash, zsh and pwsh.
 

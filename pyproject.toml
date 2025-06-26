@@ -1,6 +1,6 @@
 [project]
 name = "fun-apis-cli"
-version = "1.0.0"
+version = "1.0.1"
 description = "A fun Python CLI tool for fetching random facts, animal information, quotes, and much more from various APIs."
 readme = "README_PyPi.md"
 requires-python = ">=3.13"
@@ -37,7 +37,7 @@ include = ["fun_apis*"]
 fun_apis = ["constants/data/*.json"]
 
 [tool.setuptools.exclude-package-data]
-fun_apis = ["requirements.txt","README.md"]
+fun_apis = ["README.md"]
 
 [tool.uv.workspace]
 members = [
