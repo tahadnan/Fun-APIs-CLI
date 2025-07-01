@@ -3,6 +3,10 @@
     <a href="https://badge.fury.io/py/Fun-APIs-CLI"><img src="https://badge.fury.io/py/Fun-APIs-CLI.svg?icon=si%3Apython" alt="PyPI version" height="18"></a>
 </p>
 
+# Project Status
+Dear users and visitors, this project development is **COMPLETED** and no further development, from the creator's part, is expected in the foreseen future, but feel free to fork the project and build upon it, or improve it in any way. The latest stable release by the creator is [v1.0.2](https://pypi.org/project/fun-apis-cli/), thanks for your support, keep learning and contributing !  
+
+
 # Fun APIs CLI
 
 A simple Python command-line interface utility to interact with various fun APIs: facts, animals, quotes...
@@ -36,9 +40,6 @@ cd Fun-APIs-CLI
 uv sync
 uv run -m fun_apis.main
 ```
-
-## To-Do
-+ Add shell completetion support for bash, zsh and pwsh.
 
 ## Contributing
 
